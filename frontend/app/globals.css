@@ -1,0 +1,368 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+:root {
+  /* Palette (docs/design-system.md §1) */
+  --paper: #ffffff;
+  --fog: #f4f4f5;
+  --mist: #e4e4e7;
+  --ash: #a1a1aa;
+  --graphite: #3f3f46;
+  --carbon: #18181b;
+  --black: #0a0a0a;
+  --ink-night: #101417;
+  --accent: #17445f;
+  --accent-deep: #173d58;
+
+  /* Semantic roles; dark theme swaps these, never the palette. */
+  --bg: var(--paper);
+  --surface: var(--fog);
+  --line: var(--mist);
+  --fg: var(--carbon);
+  --fg-2: var(--graphite);
+  --muted-fg: hsl(240 3.8% 45%);
+  --ring: hsl(215 25% 27%);
+  --inverse-bg: var(--carbon);
+  --inverse-fg: var(--paper);
+  --verdict-ok: #1f6142;
+  --verdict-ok-bg: #dcece2;
+  --verdict-bad: #9b2f22;
+  --verdict-bad-bg: #f5dfda;
+  --highlight: #7fb2d638;
+  /* Eval comparison table: the highlighted dark column (§4); carbon would vanish on dark surfaces. */
+  --spotlight: var(--carbon);
+  /* Node types: dataviz slots 1–3, validated all-pairs (light on paper, dark on ink-night). */
+  --node-company: #2a78d6;
+  --node-person: #eb6834;
+  --node-group: #1baf7a;
+  --shimmer-base: var(--fg-2);
+  --shimmer-highlight: var(--ash);
+  /* Resolved on :root after the theme swap, so fog sections keep fog/carbon after tone-fog flips --surface. */
+  --band: var(--surface);
+
+  color-scheme: light;
+}
+
+/* Dark: paper<->black, fog<->carbon, text carbon<->paper; accent unchanged. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--black);
+    --surface: var(--carbon);
+    --line: #ffffff1a;
+    --fg: var(--paper);
+    --fg-2: var(--mist);
+    /* Light muted-fg and ring fail AA on black; ash passes (7.8:1). */
+    --muted-fg: var(--ash);
+    --ring: var(--ash);
+    --inverse-bg: var(--paper);
+    --inverse-fg: var(--carbon);
+    --verdict-ok: #8fd3ac;
+    --verdict-ok-bg: #1d3428;
+    --verdict-bad: #f4a597;
+    --verdict-bad-bg: #43231e;
+    --highlight: #7fb2d642;
+    --spotlight: var(--accent);
+    --node-company: #3987e5;
+    --node-person: #d95926;
+    --node-group: #199e70;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: var(--black);
+  --surface: var(--carbon);
+  --line: #ffffff1a;
+  --fg: var(--paper);
+  --fg-2: var(--mist);
+  --muted-fg: var(--ash);
+  --ring: var(--ash);
+  --inverse-bg: var(--paper);
+  --inverse-fg: var(--carbon);
+  --verdict-ok: #8fd3ac;
+  --verdict-ok-bg: #1d3428;
+  --verdict-bad: #f4a597;
+  --verdict-bad-bg: #43231e;
+  --highlight: #7fb2d642;
+  --spotlight: var(--accent);
+  --node-company: #3987e5;
+  --node-person: #d95926;
+  --node-group: #199e70;
+  color-scheme: dark;
+}
+
+/* Dark bands (graph canvas, path strip) take the dark node steps and a light shimmer. */
+[data-surface="dark"] {
+  --node-company: #3987e5;
+  --node-person: #d95926;
+  --node-group: #199e70;
+  --shimmer-base: #ffffff99;
+  --shimmer-highlight: var(--paper);
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-fog: var(--fog);
+  --color-mist: var(--mist);
+  --color-ash: var(--ash);
+  --color-graphite: var(--graphite);
+  --color-carbon: var(--carbon);
+  --color-black: var(--black);
+  --color-ink-night: var(--ink-night);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-fg-2: var(--fg-2);
+  --color-muted-fg: var(--muted-fg);
+  --color-ring: var(--ring);
+  --color-inverse-bg: var(--inverse-bg);
+  --color-inverse-fg: var(--inverse-fg);
+  --color-verdict-ok: var(--verdict-ok);
+  --color-verdict-ok-bg: var(--verdict-ok-bg);
+  --color-verdict-bad: var(--verdict-bad);
+  --color-verdict-bad-bg: var(--verdict-bad-bg);
+  --color-highlight: var(--highlight);
+  --color-spotlight: var(--spotlight);
+  --color-node-company: var(--node-company);
+  --color-node-person: var(--node-person);
+  --color-node-group: var(--node-group);
+
+  --font-sans: var(--font-inter-tight), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+}
+
+@theme static {
+  /* Motion (§5): ease-out-expo primary; replaces Tailwind's default ease-out/in-out. */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-soft: cubic-bezier(.2, .8, .2, 1);
+  --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+  --ease-std: cubic-bezier(.4, 0, .2, 1);
+
+  /* Type scale (§2): large, light display; 500 only for small emphasis. */
+  --text-display: 66px;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.02em;
+  --text-display-sm: 56px;
+  --text-display-sm--line-height: 1;
+  --text-display-sm--letter-spacing: -0.02em;
+  --text-heading-lg: 45px;
+  --text-heading-lg--line-height: 1.13;
+  --text-heading-lg--letter-spacing: -0.02em;
+  --text-heading: 30px;
+  --text-heading--line-height: 1.2;
+  --text-heading--letter-spacing: -0.01em;
+  --text-heading-sm: 22px;
+  --text-heading-sm--line-height: 1.25;
+  --text-subheading: 19px;
+  --text-subheading--line-height: 1.4;
+  --text-body-lg: 17px;
+  --text-body-lg--line-height: 1.4;
+  --text-body: 15px;
+  --text-body--line-height: 1.5;
+  --text-ui: 13px;
+  --text-ui--line-height: 1.4;
+  --text-caption: 11px;
+  --text-caption--line-height: 1.5;
+  --text-mono: 13px;
+  --text-mono--line-height: 1.5;
+
+  --radius-pill: 999px;
+  --radius-card: 20px;
+  --radius-panel: 16px;
+  --radius-control: 12px;
+  --radius-sm: 9px;
+
+  --shadow-soft: 0 18px 48px #0f172a24;
+  --shadow-lift: 0 24px 80px #0f172a1f;
+  --shadow-glass: inset 0 1px #ffffff29, 0 16px 36px #00000021;
+
+  --container-content: 1140px;
+
+  --animate-fade-up: fadeUp .7s var(--ease-out) both;
+  --animate-nav-reveal: navReveal .8s var(--ease-soft) .1s both;
+  --animate-content-reveal: contentReveal 1s var(--ease-soft) .25s both;
+  --animate-overlay-in: overlayIn .72s var(--ease-out) both;
+  --animate-item-in: itemIn .52s var(--ease-out) both;
+  --animate-item-reveal: itemReveal .58s var(--ease-out) both;
+  --animate-hero-settle: heroSettle 1s var(--ease-out) both;
+  --animate-flow-travel: flowTravel 7s linear infinite;
+  --animate-flow-pulse: flowPulse 2.4s var(--ease-out) infinite;
+  --animate-cursor-blink: cursorBlink .78s step-end infinite;
+  --animate-timer: timer linear both;
+  --animate-drawer-in: drawerIn .4s var(--ease-out) both;
+  --animate-sheet-in: sheetIn .4s var(--ease-out) both;
+  --animate-scrim-in: scrimIn .25s var(--ease-std) both;
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes navReveal {
+    from { opacity: 0; transform: translateY(-14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes contentReveal {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes overlayIn {
+    from { opacity: 0; transform: translateY(22px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes itemIn {
+    from { opacity: 0; transform: translateY(-9px) scale(.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes itemReveal {
+    from { opacity: 0; transform: translateY(16px) scale(.97); }
+    to { opacity: var(--item-opacity, 1); transform: translateY(0) scale(1); }
+  }
+  @keyframes heroSettle {
+    from { opacity: 0; transform: scale(1.05); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  @keyframes flowTravel {
+    to { stroke-dashoffset: -52px; }
+  }
+  @keyframes flowPulse {
+    0%, 100% { opacity: .38; transform: scale(.76); }
+    50% { opacity: 1; transform: scale(1.18); }
+  }
+  @keyframes cursorBlink {
+    0%, 45% { opacity: 1; }
+    45.01%, 100% { opacity: 0; }
+  }
+  @keyframes drawerIn {
+    from { opacity: 0; transform: translateX(24px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes sheetIn {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  @keyframes scrimIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes shimmer {
+    from { background-position: 100% 0; }
+    to { background-position: 0% 0; }
+  }
+  @keyframes timer {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* Glass recipe (§3) for overlays on dark imagery / graph canvas. */
+@utility glass {
+  @apply backdrop-blur-[22px] backdrop-saturate-[1.25];
+  background: #0e0e0e47;
+  border: 1px solid #ffffff2e;
+  border-radius: 16px;
+  box-shadow: var(--shadow-glass);
+}
+
+/* Fixed over light and dark sections: the recipe's gradient sits on an ink-night base so paper text keeps AA on white. */
+@utility glass-nav {
+  @apply backdrop-blur-[28px] backdrop-saturate-[1.35];
+  background: linear-gradient(135deg, #ffffff24, #11111100), #101417d1;
+  border: 1px solid #ffffff2e;
+  border-radius: 999px;
+  box-shadow: var(--shadow-glass);
+}
+
+/* Opaque-enough glass for long reading over light pages (evidence drawer). */
+@utility glass-strong {
+  @apply backdrop-blur-[22px] backdrop-saturate-[1.25];
+  background: #101417e6;
+  border: 1px solid #ffffff2e;
+  border-radius: 16px;
+  box-shadow: var(--shadow-glass), var(--shadow-lift);
+}
+
+/* Alternate section band; cards inside flip to the page colour so they stay distinct. */
+@utility tone-fog {
+  background: var(--band);
+  --surface: var(--bg);
+  /* Light muted-fg is 4.4:1 on fog; fall back to the secondary text colour. */
+  --muted-fg: var(--fg-2);
+}
+
+/* Shimmer text (transitions-dev): data-text duplicates the label for the sweeping band. */
+.t-shimmer {
+  position: relative;
+  display: inline-block;
+  color: var(--shimmer-base);
+}
+
+.t-shimmer::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(90deg, transparent 0%, transparent 40%, var(--shimmer-highlight) 50%, transparent 60%, transparent 100%);
+  background-size: 400% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 2s linear infinite;
+}
+
+/* Elements wait hidden until <Reveal> marks them; never hide content when scripts are off. */
+@media (scripting: enabled) {
+  [data-reveal="pending"] {
+    opacity: 0;
+  }
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--paper);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* On dark bands the ring must stay visible regardless of theme. */
+  [data-surface="dark"] :focus-visible {
+    outline-color: var(--paper);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition-duration: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+  }
+}
