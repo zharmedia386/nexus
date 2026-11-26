@@ -34,7 +34,7 @@ Full evaluation write-up: [docs/report/eval-report.md](docs/report/eval-report.m
 Backend:
 
 ```bash
-# Postgres: local server on 5432 (or `podman-compose -f infra/compose.yaml up -d`, then POSTGRES_PORT=5433)
+# Postgres: local server on 5432 (or `podman-compose --env-file .env -f infra/compose.yaml up -d`, then POSTGRES_PORT=5433)
 # Neo4j: `brew install neo4j && brew services start neo4j`
 cp .env.example .env              # then fill LLM_API_KEY, POSTGRES_PASSWORD, NEO4J_PASSWORD
 cd backend
