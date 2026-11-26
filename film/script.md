@@ -1,6 +1,6 @@
 # NEXUS demo film: script
 
-103.6 s, 1920×1080, 30 fps. Voice: Kokoro `af_heart`. 23 takes, about 240 words of speech in 92 s (about 155 wpm).
+105.6 s, 1920×1080, 30 fps. Voice: Kokoro `af_heart`. 23 takes, about 240 words of speech in 92 s (about 155 wpm).
 The VO times below are the take start times on the film clock (`vo/schedule.json`; speech starts about 0.3 s after each).
 Every company and person in the corpus is fictional; L01 says so.
 

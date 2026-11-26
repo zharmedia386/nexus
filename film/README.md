@@ -1,6 +1,6 @@
 # NEXUS demo film
 
-The 103.6 s narrated film on the landing page: `frontend/public/film/nexus-demo.mp4` (+ `nexus-demo-poster.png`,
+The 105.6 s narrated film on the landing page: `frontend/public/film/nexus-demo.mp4` (+ `nexus-demo-poster.png`,
 `nexus-demo.en.vtt`). Every UI frame is the real app recorded against the live stack; nothing is mocked.
 Script, beats and on-screen text: [`script.md`](script.md).
 
@@ -96,7 +96,7 @@ was scored.
 
 Kept takes: synth 0.000–0.200 (mean 0.11), noise -78.4 to -93.5 dBFS, all at or under the baseline noise.
 
-Final mix (audio track of the MP4, 103.6 s): -16.0 LUFS integrated, -1.4 dBTP, LRA 3.5 LU (ffmpeg `ebur128`).
+Final mix (audio track of the MP4, 105.6 s): -16.0 LUFS integrated, -1.4 dBTP, LRA 3.5 LU (ffmpeg `ebur128`).
 earshot on the whole mix: synth 0.831, noise floor -200 dBFS (digital silence between lines). A whole-file score is
 not comparable with per-take scores: the same voice's 18 unselected full-line takes, concatenated and normalised the
 same way (99.6 s), score 0.858. No music bed: the film runs on voice and picture only.

@@ -34,7 +34,7 @@
   <img src="docs/media/nexus-hero.gif" alt="NEXUS: hybrid search abstains, graph_local walks PT Cahaya Teguh to Zaenab Thamrin to Raden Prasasta to PT Karya Semesta, then shows the cited answer and its 3-hop path" width="900">
 </p>
 
-<p align="center"><i>Hybrid search says the answer isn't there. <code>graph_local</code> walks three hops across three documents and returns PT Karya Semesta, with a quote for each hop. 15 s cut from the <a href="frontend/public/film/nexus-demo.mp4">103.6 s demo film</a> (real app, live stack; the graph walk itself is drawn from the API's returned path, see <a href="film/README.md">film/README.md</a>).</i></p>
+<p align="center"><i>Hybrid search says the answer isn't there. <code>graph_local</code> walks three hops across three documents and returns PT Karya Semesta, with a quote for each hop. 15 s cut from the <a href="frontend/public/film/nexus-demo.mp4">105.6 s demo film</a> (real app, live stack; the graph walk itself is drawn from the API's returned path, see <a href="film/README.md">film/README.md</a>).</i></p>
 
 | Landing page | Ask: one question, several modes | Benchmarks |
 |---|---|---|

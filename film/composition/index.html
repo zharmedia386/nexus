@@ -159,7 +159,7 @@ video, .plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080
 <script src="./runtime/motion.js"></script>
 <script>
 /* SEEK CONTRACT: everything visible is a pure function of t. Times below are film seconds from film/vo/schedule.json. */
-const M = Motion.film({ fps: 30, duration: 103.6, width: 1920, height: 1080, clock: 'smooth' });
+const M = Motion.film({ fps: 30, duration: 105.6, width: 1920, height: 1080, clock: 'smooth' });
 const F = (t) => Math.round(t * 30);
 
 // Camera as x/y/scale about the top-left: [t, scale, centreX, centreY, ease] puts (cx, cy) of the 1920x1080 layer at frame centre.
@@ -178,7 +178,7 @@ function cursor(sel, keys, presses, on, off) {
   M.kf(sel, 'scale', scale);
 }
 const scenes = [['#sA', 0, 10.3], ['#sB', 10.3, 20.5], ['#sC', 20.5, 24.6], ['#sD', 24.6, 37.0], ['#sC', 37.0, 51.4],
-  ['#sF', 51.4, 58.5], ['#sG', 58.5, 64.6], ['#sH', 64.6, 69.6], ['#sI', 69.6, 92.6], ['#sJ', 92.6, 103.6]];
+  ['#sF', 51.4, 58.5], ['#sG', 58.5, 64.6], ['#sH', 64.6, 69.6], ['#sI', 69.6, 92.6], ['#sJ', 92.6, 105.6]];
 scenes.forEach(([sel, a, b], i) => M.cut(F(a), { hide: i ? [scenes[i - 1][0]] : [], show: [sel] }));
 
 /* ---------- A  cold open ---------- */
@@ -277,7 +277,7 @@ M.hide('#cGl', F(79.0)); M.hide('#cHy', F(79.0));
 });
 
 /* ---------- J  close ---------- */
-cam('#camJ', [[92.6, 1.0, 960, 540], [103.6, 1.04, 960, 540, 'cruise']]);
+cam('#camJ', [[92.6, 1.0, 960, 540], [105.6, 1.04, 960, 540, 'cruise']]);
 [93.8, 94.5, 95.0, 95.6, 96.4, 97.2].forEach((t, i) => M.enter(`#w${i}`, { at: F(t), frames: 12, from: { y: 50 }, smear: { axis: 'y', px: 18, frames: 3 } }));
 M.enter('#models', { at: F(97.9), frames: 14, from: { y: 26 } });
 M.kf('#stack', 'y', [[F(99.4), 0], [F(100.2), -150, 'softInOut']]);
