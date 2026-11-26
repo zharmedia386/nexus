@@ -121,6 +121,19 @@ describe("AnswerText verdicts", () => {
     expect(screen.getByRole("button", { name: /doc_001:0000/ })).toHaveAttribute("data-verdict", "unsupported");
     expect(screen.getByText("Alpha").tagName).toBe("STRONG");
   });
+
+  it("renders single-asterisk emphasis as italics without touching bold or spaced asterisks", () => {
+    const answer = makeAnswer({
+      text: "Budi serves as *Direktur Keuangan* at **PT Alpha**, rated 2 * 3 by peers.",
+      hits: [],
+      claims: [],
+    });
+    render(<AnswerText answer={answer} onCite={() => {}} />);
+
+    expect(screen.getByText("Direktur Keuangan").tagName).toBe("EM");
+    expect(screen.getByText("PT Alpha").tagName).toBe("STRONG");
+    expect(screen.getByText(/rated 2 \* 3 by peers/)).toBeInTheDocument();
+  });
 });
 
 describe("AnswerText lists", () => {

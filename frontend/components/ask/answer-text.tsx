@@ -12,7 +12,8 @@ export const VERDICT_STYLES: Record<Verdict, string> = {
 
 // Mirrors backend CITATION_PATTERN: any [chunk-id-like] token is a citation.
 export const CITATION_PATTERN = /\[([A-Za-z0-9_.:-]{1,64})\]/g;
-const INLINE = /(\[[A-Za-z0-9_.:-]{1,64}\]|\*\*[^*]+\*\*)/;
+// Italic asterisks must hug their text, so list bullets ("* item") and spaced math ("2 * 3") stay literal.
+const INLINE = /(\[[A-Za-z0-9_.:-]{1,64}\]|\*\*[^*]+\*\*|(?<!\*)\*(?![\s*])[^*\n]*?[^\s*]\*(?!\*))/;
 const LIST_MARKER = /^\s*(?:[-*+]|\d+[.)])\s+/;
 const ORDERED_MARKER = /^\s*\d+[.)]\s+/;
 const HEADING = /^\s*#+\s+/;
@@ -158,6 +159,11 @@ export function AnswerText({ answer, onCite }: AnswerTextProps) {
       if (token.startsWith("**") && token.endsWith("**") && token.length > 4) {
         glue = null;
         nodes.push(<strong key={`${key}-${position}`} className="font-medium">{token.slice(2, -2)}</strong>);
+        return;
+      }
+      if (token.startsWith("*") && token.endsWith("*") && token.length > 2) {
+        glue = null;
+        nodes.push(<em key={`${key}-${position}`}>{token.slice(1, -1)}</em>);
         return;
       }
       const text = token.replaceAll("**", "");
