@@ -54,6 +54,9 @@ FIELDS:
 - quote: the shortest span copied character-for-character from the text that states
   the relation, at most 300 characters. Do not translate, paraphrase, fix spelling,
   or join separate pieces. For table rows, quote the row.
+  When a sentence chains facts about one subject ("A adalah X dari B dan merupakan Y
+  dari C"), the later fact has no subject of its own: quote the one contiguous span
+  from the subject's name through the object's name, even if it covers both facts.
 
 RULES:
 - Extract only facts the text states. Do not infer facts not stated, do not use outside

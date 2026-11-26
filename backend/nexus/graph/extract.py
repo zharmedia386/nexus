@@ -5,7 +5,7 @@ from nexus.graph.prompts import EXTRACT_SYSTEM_PROMPT
 from nexus.graph.schema import ChunkExtraction, ExtractionResult, VerifiedRelation
 from nexus.llm import chat_json
 
-EXTRACT_PROMPT_VERSION = "v1"
+EXTRACT_PROMPT_VERSION = "v2"
 EXTRACT_TIMEOUT = 300
 MAX_QUOTE_CHARS = 300
 
