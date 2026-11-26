@@ -1,54 +1,54 @@
-# NEXUS evaluation report — run 410c2a78
+# NEXUS evaluation report — run 96950f8a
 
 ## 1. Summary
 
-Run `410c2a78-442e-4085-b342-86556c27c41c` scored 136 questions across 5 modes (claim split v2, rescored). answer_match covers the 112 answerable questions; the 24 unanswerable ones are scored by abstain accuracy. graph_local answer_match is 0.6632 [0.5755, 0.7454] against hybrid 0.5227 [0.432, 0.611]; the paired difference is +0.1405 [0.0524, 0.2387] (significant, 95% bootstrap). Versus hybrid, graph_local is significantly better on multi_hop_2, multi_hop_3; significantly worse on thematic; no significant difference on single_hop, temporal. Synthetic data and a single run: read §9 before quoting these numbers.
+Run `96950f8a-16ae-4976-a616-15fef9fd59d9` scored 136 questions across 5 modes (claim split v2, rescored). answer_match covers the 112 answerable questions; the 24 unanswerable ones are scored by abstain accuracy. graph_local answer_match is 0.7007 [0.6163, 0.7808] against hybrid 0.5219 [0.4316, 0.6098]; the paired difference is +0.1788 [0.087, 0.2773] (significant, 95% bootstrap). Versus hybrid, graph_local is significantly better on multi_hop_2, multi_hop_3; significantly worse on thematic; no significant difference on single_hop, temporal. Synthetic data and a single run: read §9 before quoting these numbers.
 
 **answer_match [95% CI] by category × mode**
 
 | category | rag | hybrid | graph_local | graph_global | auto |
 |---|---|---|---|---|---|
-| all | 0.4723 [0.3825, 0.5646] | 0.5227 [0.432, 0.611] | 0.6632 [0.5755, 0.7454] | 0.3222 [0.2385, 0.4078] | 0.6445 [0.5548, 0.7273] |
-| multi_hop_2 | 0.0 [0.0, 0.0] | 0.0714 [0.0, 0.2143] | 0.5714 [0.2857, 0.7857] | 0.0 [0.0, 0.0] | 0.5 [0.2143, 0.7857] |
-| multi_hop_3 | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.4545 [0.2727, 0.6364] | 0.0 [0.0, 0.0] | 0.4545 [0.2727, 0.6364] |
+| all | 0.4723 [0.3825, 0.5646] | 0.5219 [0.4316, 0.6098] | 0.7007 [0.6163, 0.7808] | 0.3198 [0.236, 0.4053] | 0.6739 [0.5876, 0.7589] |
+| multi_hop_2 | 0.0 [0.0, 0.0] | 0.0714 [0.0, 0.2143] | 0.6429 [0.3571, 0.8571] | 0.0 [0.0, 0.0] | 0.5714 [0.2857, 0.7857] |
+| multi_hop_3 | 0.0 [0.0, 0.0] | 0.0 [0.0, 0.0] | 0.5455 [0.3636, 0.7727] | 0.0 [0.0, 0.0] | 0.5455 [0.3636, 0.7727] |
 | single_hop | 0.725 [0.6, 0.85] | 0.825 [0.7, 0.925] | 0.9 [0.8, 0.975] | 0.475 [0.3, 0.625] | 0.9 [0.8, 0.975] |
-| temporal | 0.4286 [0.1429, 0.7143] | 0.4286 [0.2143, 0.7143] | 0.4286 [0.2143, 0.7143] | 0.2143 [0.0, 0.4286] | 0.4286 [0.2143, 0.7143] |
-| thematic | 0.8137 [0.7028, 0.9149] | 0.8427 [0.7664, 0.9183] | 0.6488 [0.4796, 0.7926] | 0.6401 [0.4565, 0.8027] | 0.5995 [0.4286, 0.7581] |
+| temporal | 0.4286 [0.1429, 0.7143] | 0.4286 [0.2143, 0.7143] | 0.5 [0.2143, 0.7857] | 0.2143 [0.0, 0.4286] | 0.4286 [0.2143, 0.7143] |
+| thematic | 0.8137 [0.7028, 0.9149] | 0.8386 [0.7609, 0.9154] | 0.6579 [0.4862, 0.8049] | 0.628 [0.4437, 0.7909] | 0.6124 [0.4358, 0.7721] |
 | unanswerable | - | - | - | - | - |
 
 **Δ answer_match vs hybrid (paired bootstrap, * = CI excludes 0)**
 
 | category | rag | graph_local | graph_global | auto |
 |---|---|---|---|---|
-| all | -0.0503 [-0.1003, -0.006] * | +0.1405 [0.0524, 0.2387] * | -0.2005 [-0.2807, -0.1234] * | +0.1219 [0.0315, 0.2141] * |
-| multi_hop_2 | -0.0714 [-0.2143, 0.0] | +0.5 [0.2143, 0.7857] * | -0.0714 [-0.2143, 0.0] | +0.4286 [0.2143, 0.7143] * |
-| multi_hop_3 | +0.0 [0.0, 0.0] | +0.4545 [0.2727, 0.6818] * | +0.0 [0.0, 0.0] | +0.4545 [0.2727, 0.6818] * |
+| all | -0.0495 [-0.0986, -0.0052] * | +0.1788 [0.087, 0.2773] * | -0.2021 [-0.2815, -0.1251] * | +0.152 [0.061, 0.244] * |
+| multi_hop_2 | -0.0714 [-0.2143, 0.0] | +0.5714 [0.2857, 0.7857] * | -0.0714 [-0.2143, 0.0] | +0.5 [0.2143, 0.7857] * |
+| multi_hop_3 | +0.0 [0.0, 0.0] | +0.5455 [0.3182, 0.7727] * | +0.0 [0.0, 0.0] | +0.5455 [0.3182, 0.7727] * |
 | single_hop | -0.1 [-0.2, -0.025] * | +0.075 [-0.025, 0.2] | -0.35 [-0.5, -0.2] * | +0.075 [0.0, 0.175] |
-| temporal | +0.0 [-0.2143, 0.2143] | +0.0 [0.0, 0.0] | -0.2143 [-0.4286, 0.0] | +0.0 [0.0, 0.0] |
-| thematic | -0.029 [-0.0964, 0.0371] | -0.1939 [-0.4054, -0.0168] * | -0.2026 [-0.4313, -0.004] * | -0.2432 [-0.457, -0.053] * |
+| temporal | +0.0 [-0.2143, 0.2143] | +0.0714 [0.0, 0.2143] | -0.2143 [-0.4286, 0.0] | +0.0 [0.0, 0.0] |
+| thematic | -0.0248 [-0.0891, 0.038] | -0.1807 [-0.3906, -0.0032] * | -0.2106 [-0.4364, -0.0122] * | -0.2262 [-0.4449, -0.0325] * |
 | unanswerable | - | - | - | - |
 
 **recall@k by category × mode**
 
 | category | rag | hybrid | graph_local | graph_global | auto |
 |---|---|---|---|---|---|
-| all | 0.5557 | 0.6018 | 0.8664 | 0.3671 | 0.8069 |
-| multi_hop_2 | 0.2857 | 0.3214 | 0.9286 | 0.1786 | 0.8214 |
-| multi_hop_3 | 0.2576 | 0.2689 | 0.7424 | 0.197 | 0.7424 |
+| all | 0.5557 | 0.6018 | 0.8843 | 0.3612 | 0.8237 |
+| multi_hop_2 | 0.2857 | 0.3214 | 0.9286 | 0.1429 | 0.8214 |
+| multi_hop_3 | 0.2576 | 0.2689 | 0.8333 | 0.197 | 0.8333 |
 | single_hop | 0.775 | 0.825 | 1.0 | 0.475 | 0.95 |
 | temporal | 0.7143 | 0.7857 | 1.0 | 0.2143 | 0.7857 |
-| thematic | 0.5262 | 0.5902 | 0.6231 | 0.5583 | 0.6155 |
+| thematic | 0.5262 | 0.5902 | 0.6231 | 0.5508 | 0.6098 |
 | unanswerable | - | - | - | - | - |
 
 **abstain accuracy by category × mode**
 
 | category | rag | hybrid | graph_local | graph_global | auto |
 |---|---|---|---|---|---|
-| all | 0.7574 | 0.7941 | 0.8382 | 0.5147 | 0.8235 |
-| multi_hop_2 | 0.5714 | 0.6429 | 0.7143 | 0.2143 | 0.7143 |
-| multi_hop_3 | 0.5 | 0.6364 | 0.8636 | 0.2273 | 0.8636 |
+| all | 0.7574 | 0.7941 | 0.8603 | 0.5074 | 0.8382 |
+| multi_hop_2 | 0.5714 | 0.6429 | 0.7143 | 0.1429 | 0.7143 |
+| multi_hop_3 | 0.5 | 0.6364 | 0.9545 | 0.2273 | 0.9545 |
 | single_hop | 0.75 | 0.825 | 0.925 | 0.475 | 0.9 |
-| temporal | 0.5714 | 0.5 | 0.5 | 0.2143 | 0.5 |
+| temporal | 0.5714 | 0.5 | 0.5714 | 0.2143 | 0.5 |
 | thematic | 1.0 | 1.0 | 0.7727 | 0.7273 | 0.7273 |
 | unanswerable | 1.0 | 0.9583 | 1.0 | 1.0 | 1.0 |
 
@@ -119,7 +119,7 @@ Fairness rules (design): every mode shares the chunker, embedder, reranker, answ
 
 | constant | value |
 |---|---|
-| extract_prompt | v1 |
+| extract_prompt | v2 |
 | summary_prompt | v1 |
 | adjudicate_prompt | v1 |
 | judge_prompt | 1 |
@@ -132,29 +132,29 @@ N per mode: 136 questions; metrics: answer_match (gold entity mentions), recall@
 
 | mode | p50_ms | p95_ms | mean_llm_calls | mean_verify_calls | mean_verify_ms | total LLM calls |
 |---|---|---|---|---|---|---|
-| rag | 3007 | 55958 | 1.0 | 0.5588 | 4161.3456 | 136 |
-| hybrid | 4130 | 59245 | 1.0 | 0.6324 | 4962.4412 | 136 |
-| graph_local | 6126 | 67074 | 3.3088 | 0.6618 | 5429.5074 | 450 |
-| graph_global | 6018 | 90442 | 8.5 | 0.3382 | 3697.2941 | 1156 |
-| auto | 6223 | 68814 | 3.9191 | 0.6471 | 5177.3897 | 533 |
+| rag | 2921 | 56222 | 1.0 | 0.5588 | 4098.5882 | 136 |
+| hybrid | 3706 | 51578 | 1.0 | 0.6324 | 4682.1838 | 136 |
+| graph_local | 5998 | 66398 | 3.3162 | 0.6765 | 5156.0 | 451 |
+| graph_global | 5700 | 89732 | 8.5 | 0.3309 | 3351.3971 | 1156 |
+| auto | 6114 | 67505 | 3.9191 | 0.6544 | 5008.6838 | 533 |
 
 ## 5. Graph quality
 
-Scored over 100 docs against the world ground truth (file timestamp 20261124T113033Z).
+Scored over 100 docs against the world ground truth (file timestamp 20261126T011306Z).
 
 | metric | precision | recall | f1 | support |
 |---|---|---|---|---|
 | entities (macro) | 0.9921 | 0.9937 | 0.9923 | 1092 |
 | entities (micro) | 0.9927 | 0.9908 | 0.9918 | 1092 |
-| relations (macro) | 0.9523 | 0.9132 | 0.9246 | 1151 |
-| relations (micro) | 0.9753 | 0.9262 | 0.9501 | 1151 |
+| relations (macro) | 0.9523 | 0.914 | 0.9251 | 1151 |
+| relations (micro) | 0.9753 | 0.927 | 0.9506 | 1151 |
 | entity resolution | 0.9688 | 1.0 | 0.9842 | - |
 
 **Relations by type**
 
 | type | precision | recall | f1 | support |
 |---|---|---|---|---|
-| FAMILY_OF | 1.0 | 0.9531 | 0.976 | 64 |
+| FAMILY_OF | 1.0 | 0.9688 | 0.9841 | 64 |
 | FOUNDED | 1.0 | 1.0 | 1.0 | 58 |
 | INVESTED_IN | 1.0 | 0.8333 | 0.9091 | 12 |
 | MEMBER_OF_GROUP | 1.0 | 0.9286 | 0.963 | 112 |
@@ -163,17 +163,17 @@ Scored over 100 docs against the world ground truth (file timestamp 20261124T113
 | SERVES_AS | 0.9493 | 0.888 | 0.9176 | 527 |
 | SUBSIDIARY_OF | 1.0 | 1.0 | 1.0 | 107 |
 
-Temporal accuracy 1.0 over 1066 dated relations; 13 entity-resolution collision merges; ticker links 28/28; 59 extracted edges dropped as unverified.
+Temporal accuracy 1.0 over 1067 dated relations; 13 entity-resolution collision merges; ticker links 28/28; 58 extracted edges dropped as unverified.
 
 ## 6. Evidence quality
 
 | mode | citation_precision | unsupported_claim_rate | claims | uncited | awaiting re-verify | dropped by splitter |
 |---|---|---|---|---|---|---|
-| rag | 0.763 | 0.237 | 558 | 169 | 0 | 0 |
-| hybrid | 0.7709 | 0.2291 | 694 | 237 | 0 | 0 |
-| graph_local | 0.7991 | 0.2009 | 723 | 251 | 0 | 0 |
-| graph_global | 0.7421 | 0.2579 | 580 | 259 | 0 | 0 |
-| auto | 0.786 | 0.214 | 717 | 254 | 0 | 0 |
+| rag | 0.7701 | 0.2299 | 553 | 165 | 0 | 0 |
+| hybrid | 0.7705 | 0.2295 | 663 | 224 | 0 | 0 |
+| graph_local | 0.7867 | 0.2133 | 735 | 257 | 0 | 0 |
+| graph_global | 0.7352 | 0.2648 | 578 | 266 | 0 | 0 |
+| auto | 0.7801 | 0.2199 | 720 | 255 | 0 | 0 |
 
 Uncited claims count as unsupported; claims awaiting re-verify count in neither rate.
 
@@ -190,28 +190,28 @@ Claim splitter v2 skips non-claim lines (headings, step labels, abstentions); it
 
 ## 7. Global (thematic) questions
 
-**A = graph_global vs B = hybrid** (categories: thematic; judge prompt v1; mean answer length 1891 vs 2030 chars)
+**A = graph_global vs B = hybrid** (categories: thematic; judge prompt v1; mean answer length 1912 vs 2038 chars)
 
 | criterion | A wins | B wins | ties | n | errors |
 |---|---|---|---|---|---|
-| comprehensiveness | 12 | 7 | 3 | 22 | 0 |
-| diversity | 12 | 8 | 2 | 22 | 0 |
-| empowerment | 12 | 7 | 3 | 22 | 0 |
-| directness | 7 | 6 | 9 | 22 | 0 |
+| comprehensiveness | 13 | 8 | 1 | 22 | 0 |
+| diversity | 14 | 7 | 1 | 22 | 0 |
+| empowerment | 13 | 8 | 1 | 22 | 0 |
+| directness | 5 | 8 | 9 | 22 | 0 |
 
-**A = graph_local vs B = hybrid** (categories: thematic; judge prompt v1; mean answer length 1903 vs 2030 chars)
+**A = graph_local vs B = hybrid** (categories: thematic; judge prompt v1; mean answer length 1923 vs 2038 chars)
 
 | criterion | A wins | B wins | ties | n | errors |
 |---|---|---|---|---|---|
-| comprehensiveness | 10 | 10 | 2 | 22 | 0 |
-| diversity | 10 | 9 | 3 | 22 | 0 |
-| empowerment | 10 | 10 | 2 | 22 | 0 |
+| comprehensiveness | 9 | 9 | 4 | 22 | 0 |
+| diversity | 9 | 9 | 4 | 22 | 0 |
+| empowerment | 9 | 9 | 4 | 22 | 0 |
 | directness | 8 | 7 | 7 | 22 | 0 |
 
 
 ## 8. Examples
 
-Selection rule: the first 3 multi-hop question ids (sorted) where graph_local matched the gold answer and hybrid did not, excluding abstaining or hedged answers and requiring at least one supported claim. Across all multi-hop questions, graph_local matched where hybrid did not on 17; the reverse (hybrid matched, graph_local did not) on 0.
+Selection rule: the first 3 multi-hop question ids (sorted) where graph_local matched the gold answer and hybrid did not, excluding abstaining or hedged answers and requiring at least one supported claim. Across all multi-hop questions, graph_local matched where hybrid did not on 20; the reverse (hybrid matched, graph_local did not) on 0.
 
 ### m2_001 (multi_hop_2)
 
@@ -219,18 +219,17 @@ Selection rule: the first 3 multi-hop question ids (sorted) where graph_local ma
 
 **graph_local answer:**
 
-> Based on the documents provided, the holder of a stake in **Nusantara Mulia** is **Prasetya Utama**, who holds 46% of the shares [doc_078:0000].
+> Based on the documents provided, **Prasetya Utama** is identified as the founder and a shareholder (holding 46% since 2011) of **Nusantara Mulia** [doc_078:0000].
 >
 > Prasetya Utama currently serves as **Direktur Keuangan** (Finance Director) at **PT Bintang Kreasi Tbk** [doc_063:0000] [doc_063:0001].
 >
-> [doc_078:0000]
-> [doc_063:0000]
-> [doc_063:0001]
+> Therefore, the company is **PT Bintang Kreasi Tbk**.
 
 **Claims:**
 
-- [supported] Based on the documents provided, the holder of a stake in Nusantara Mulia is Prasetya Utama, who holds 46% of the shares. (doc_078:0000)
+- [supported] Based on the documents provided, Prasetya Utama is identified as the founder and a shareholder (holding 46% since 2011) of Nusantara Mulia. (doc_078:0000)
 - [supported] Prasetya Utama currently serves as Direktur Keuangan (Finance Director) at PT Bintang Kreasi Tbk. (doc_063:0000, doc_063:0001)
+- [unsupported] Therefore, the company is PT Bintang Kreasi Tbk. (no citation)
 
 **Graph paths** (1):
 
