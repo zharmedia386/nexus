@@ -1,9 +1,8 @@
 from collections.abc import Callable, Iterator
 from functools import lru_cache
-from typing import Annotated
 
 import psycopg
-from fastapi import Depends, Header, HTTPException
+from fastapi import Header, HTTPException
 
 from nexus.checks import CHECKS
 from nexus.config import Settings
@@ -24,10 +23,10 @@ def get_deps() -> Deps:
     return default_deps()
 
 
-def get_graph(deps: Annotated[Deps, Depends(get_deps)]) -> GraphStore:
-    if deps.graph is None:
-        raise HTTPException(status_code=503, detail="graph store unavailable")
-    return deps.graph
+@lru_cache
+def get_graph() -> GraphStore:
+    # Graph endpoints only read Neo4j; going through get_deps would also require Milvus to be up.
+    return GraphStore()
 
 
 def get_conn() -> Iterator[psycopg.Connection]:
