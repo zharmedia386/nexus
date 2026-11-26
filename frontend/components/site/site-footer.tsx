@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LogoMark } from "@/components/site/logo-mark";
 import { APP_PAGES, CONTENT_PAGES, REPO_URL } from "@/lib/routes";
 
 const linkClass = "text-muted-fg transition-colors duration-150 ease-std hover:text-fg";
@@ -30,6 +31,11 @@ export function SiteFooter({ runId }: { runId: string }) {
         <li className="text-muted-fg">Eval run {runId}</li>
       </Column>
       <div className="flex flex-col gap-2 text-muted-fg">
+        <p className="mb-1 flex items-center gap-2 font-medium tracking-[0.14em] text-fg">
+          <LogoMark className="size-5" />
+          NEXUS
+        </p>
+        <p className="text-fg">Answers that show their path.</p>
         <p>Neo4j · Milvus · Postgres · LangGraph · FastAPI · Next.js</p>
         <p>All companies and people are fictional.</p>
       </div>

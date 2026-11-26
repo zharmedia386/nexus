@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { LogoMark } from "@/components/site/logo-mark";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { CONTENT_PAGES, REPO_URL } from "@/lib/routes";
 
@@ -39,12 +40,7 @@ export function SiteNav() {
       <nav aria-label="Primary" className="relative">
         <div className="glass-nav flex items-center gap-2 py-1.5 pr-1.5 pl-4 text-paper sm:gap-4">
           <Link href="/" className="flex items-center gap-2 rounded-pill text-ui font-medium tracking-[0.14em]">
-            <svg viewBox="0 0 20 20" className="size-[18px]" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
-              <circle cx="4" cy="15" r="2" />
-              <circle cx="16" cy="5" r="2" />
-              <circle cx="15" cy="15" r="1.5" />
-              <path d="M5.6 13.6 14.4 6.4M6 15h7.5" strokeDasharray="2 2" />
-            </svg>
+            <LogoMark className="size-5" />
             <span>NEXUS</span>
           </Link>
           <ul className="hidden items-center md:flex">

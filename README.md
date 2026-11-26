@@ -1,6 +1,11 @@
 <div align="center">
 
-<h1>NEXUS</h1>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/brand/nexus-lockup-dark.svg">
+  <img src="docs/brand/nexus-lockup-light.svg" alt="NEXUS" width="320">
+</picture>
+
+<h3>Answers that show their path.</h3>
 
 <p>Local-first GraphRAG over a synthetic Indonesian/English corpus of company filings, with a cited source sentence for every graph hop.</p>
 
@@ -385,6 +390,7 @@ frontend/
 data/world/       planted world and generated documents
 eval/             questions, review sheet, audits, runs
 docs/report/      evaluation report (md + json)
+docs/brand/       logo kit (SVG masters, app icons) and its build script
 film/             how the demo film was captured, voiced and rendered
 infra/            compose file for Postgres and Neo4j
 ```
