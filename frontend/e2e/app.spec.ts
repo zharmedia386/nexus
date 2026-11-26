@@ -10,6 +10,8 @@ const SECTION_LABELS = [
 test("home: landing hero, nav links to routes, no legacy in-page sections", async ({ page }, testInfo) => {
   await page.goto("/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Answers that show their path");
+  // The hero figures count up from 0; shoot only once each has landed on its final value.
+  await page.waitForFunction(() => [...document.querySelectorAll("[data-count]")].every((element) => element.textContent === element.parentElement?.dataset.final));
   await shoot(page, testInfo.project.name, "main", "main");
 
   const nav = page.getByRole("navigation", { name: "Primary" });
