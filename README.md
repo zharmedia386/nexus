@@ -31,7 +31,7 @@
 > Every company and person in this repo is fictional. Names are combinatorial and checked against a blocklist of real Indonesian conglomerates and tickers. Any resemblance to a real entity is coincidental.
 
 <p align="center">
-  <img src="docs/media/nexus-hero.gif" alt="NEXUS: hybrid search abstains, graph_local walks PT Cahaya Teguh to Zaenab Thamrin to Raden Prasasta to PT Karya Semesta, then shows the cited answer and its 3-hop path" width="900">
+  <img src="docs/media/nexus-hero.gif" alt="NEXUS: hybrid search abstains, graph_local walks PT Cahaya Teguh to Zaenab Thamrin to Raden Prasasta to PT Karya Semesta, then shows the cited answer and its 3-hop path, ending on the NEXUS logo" width="840">
 </p>
 
 <p align="center"><i>Hybrid search says the answer isn't there. <code>graph_local</code> walks three hops across three documents and returns PT Karya Semesta, with a quote for each hop. 15 s cut from the <a href="frontend/public/film/nexus-demo.mp4">105.6 s demo film</a> (real app, live stack; the graph walk itself is drawn from the API's returned path, see <a href="film/README.md">film/README.md</a>).</i></p>
