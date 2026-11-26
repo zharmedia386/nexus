@@ -1,0 +1,218 @@
+{
+  "question": "At which company does the spouse of the Direktur Utama of Cahaya Teguh since 2015 currently serve as Komisaris Utama since 2019?",
+  "graph": {
+    "text": "Based on the documents provided:\n\n1.  **Identify the Direktur Utama of Cahaya Teguh since 2015:** According to [doc_061:0001], **Zaenab Thamrin** has served as the Direktur Utama of PT Cahaya Teguh since 2015.\n2.  **Identify the spouse of Zaenab Thamrin:** According to [doc_025:0000], Zaenab Thamrin is the spouse of **Raden Prasasta**.\n3.  **Identify where Raden Prasasta serves as Komisaris Utama since 2019:** According to [doc_056:0001], Raden Prasasta has served as the Komisaris Utama of **PT Karya Semesta** since 2019.\n\nTherefore, the spouse of the Direktur Utama of Cahaya Teguh serves as Komisaris Utama at **PT Karya Semesta**.",
+    "citations": [
+      "doc_061:0001",
+      "doc_025:0000",
+      "doc_056:0001"
+    ],
+    "invalid_citations": [],
+    "hits": [
+      {
+        "chunk_id": "doc_061:0001",
+        "doc_id": "doc_061",
+        "text": "Ega Kusumo menjabat sebagai Direktur Keuangan sejak 2015, sementara Mustika Megantara menjabat sebagai Direktur Operasional sejak 2014. Di sisi pengawasan, Gada Dongoran menjabat sebagai Komisaris Utama sejak 2020, dan Pranata Iswahyudi menjabat sebagai Komisaris Independen sejak 2012.\n\n**PT Cahaya Teguh**\nZaenab Thamrin menjabat sebagai Direktur Utama di PT Cahaya Teguh sejak 2015. Uchita Nuraini menjabat sebagai Direktur sejak 2005. Jabatan Komisaris Utama di PT Cahaya Teguh dipegang oleh Nilam Aryani sejak 2011.\n\n**Graha Pratama**\nKadir Thamrin menjabat sebagai Direktur Utama di Graha Pratama sejak 2020. Garan Habibi menjabat sebagai Direktur sejak 2008. Yoga Mandala menjabat sebagai Komisaris Utama di Graha Pratama sejak 2014.",
+        "score": 1
+      },
+      {
+        "chunk_id": "doc_025:0000",
+        "doc_id": "doc_025",
+        "text": "# Profil Prayitna Prasasta: Pendiri Empat Entitas Bisnis dan Jalinan Keluarga\n\nPrayitna Prasasta tercatat sebagai pendiri empat entitas bisnis, yakni PT Mulia Lancar Capital, Karya Cemerlang, FBIT, dan BKZK.\n\nPrayitna Prasasta mendirikan PT Mulia Lancar Capital pada 1995. Sebelumnya, ia mendirikan Karya Cemerlang pada 1992. Pada tahun yang sama, 1992, Prayitna Prasasta juga mendirikan FBIT. Jejak bisnis Prayitna Prasasta bermula dari pendirian BKZK pada 1986.\n\nDalam lingkup keluarga, Prayitna Prasasta adalah pasangan suami/istri dari Samiah Andriani. Keduanya merupakan orang tua dari Raden Prasasta dan Oni Prasasta. Raden Prasasta adalah saudara kandung Oni Prasasta.\n\nRaden Prasasta adalah pasangan suami/istri dari Zaenab Thamrin. Karya Thamrin adalah kerabat semenda (ipar/mertua/menantu) dari Raden Prasasta.",
+        "score": 1
+      },
+      {
+        "chunk_id": "doc_056:0001",
+        "doc_id": "doc_056",
+        "text": "*   **Direksi:**\n    *   Oni Prasasta menjabat sebagai Direktur Utama di PT Fajar Berkah Tbk sejak tahun 2013.\n    *   Gada Dongoran menjabat sebagai Direktur Keuangan di PT Fajar Berkah Tbk sejak tahun 2014.\n    *   Rina Pratiwi menjabat sebagai Direktur Operasional di PT Fajar Berkah Tbk sejak tahun 2014.\n\n**PT Karya Semesta**\n*   **Dewan Komisaris:**\n    *   Raden Prasasta menjabat sebagai Komisaris Utama di PT Karya Semesta sejak tahun 2019.\n*   **Direksi:**\n    *   Keisha Nurdiyanti menjabat sebagai Direktur Utama di PT Karya Semesta sejak tahun 2011.\n\n**PT Jaya Agung**\n*   **Dewan Komisaris:**\n    *   Samiah Andriani menjabat sebagai Komisaris Utama di PT Jaya Agung sejak tahun 2020.\n*   **Direksi:**\n    *   Gangsar Wibisono menjabat sebagai Direktur Utama di PT Jaya Agung sejak tahun 2014.\n\n**PT Karya Cemerlang**\n*   **Dewan Komisaris:**\n    *   Yusuf Permadi menjabat sebagai Komisaris Utama di PT Karya Cemerlang sejak tahun 2021.\n*   **Direksi:**\n    *   Gamblang Waluyo menjabat sebagai Direktur Utama di PT Karya Cemerlang sejak tahun 2020.",
+        "score": 1
+      },
+      {
+        "chunk_id": "doc_039:0001",
+        "doc_id": "doc_039",
+        "text": "**Susunan Dewan dan Manajemen**\n\n**Buana Nirwana**\nMichelle Usamah telah menjabat sebagai Komisaris Utama di Buana Nirwana sejak 2005. Di jajaran direksi, Faizah Mansur mengemban amanah sebagai Direktur Utama sejak 2012. Posisi Direktur dipegang oleh Puspa Pratiwi yang telah menjabat sejak 2015.\n\n**PT Tunas Unggul Tbk**\nAjeng Mandasari menjabat sebagai Komisaris Utama di PT Tunas Unggul Tbk sejak 2011. Jajaran komisaris juga diperkuat oleh Saiful Mansur yang menjabat sebagai Komisaris sejak 2013, serta dua Komisaris Independen, yaitu Padmi Hasanah yang menjabat sejak 2015 dan Baktianto Kurniawan yang menjabat sejak 2017. Di sisi eksekutif, Michelle Usamah menjabat sebagai Direktur Utama sejak 2012. Gawati Novitasari telah mengemban tugas sebagai Direktur Keuangan sejak 2008.\n\n**PT Cahaya Berkah**\nEja Zulkarnain telah menjabat sebagai Komisaris Utama di PT Cahaya Berkah sejak 2006. Jaiman Mahendra menjabat sebagai Direktur Utama sejak 2018. Posisi Direktur di PT Cahaya Berkah dipegang oleh Lembah Kusumo yang telah menjabat sejak 2008.\n\n**PT Sinar Mulia**\nNadia Hariyah menjabat sebagai Komisaris Utama di PT Sinar Mulia sejak 2021. Saiful Mansur menjabat sebagai Direktur Utama sejak 2021. Lala Winarsih telah menjabat sebagai Direktur di PT Sinar Mulia sejak 2019.",
+        "score": 0.7323858141899109
+      },
+      {
+        "chunk_id": "doc_061:0000",
+        "doc_id": "doc_061",
+        "text": "# Laporan Tahunan PT Nusantara Sakti Capital 2023\n\n**Profil Perusahaan**\n\nPT Nusantara Sakti Capital merupakan entitas induk yang memiliki portofolio investasi strategis di berbagai sektor. Hingga tahun 2023, perusahaan ini mengoperasikan dan mengawasi beberapa anak usaha utama yang telah menjadi bagian integral dari grup sejak periode sebelumnya. Secara spesifik, PT Cahaya Teguh telah menjadi anak usaha PT Nusantara Sakti Capital sejak 2019. Graha Pratama juga tercatat sebagai anak usaha PT Nusantara Sakti Capital sejak 2018. Dua entitas lainnya, yaitu PT Bintang Sentosa dan PT Jaya Kencana Tbk, resmi menjadi anak usaha PT Nusantara Sakti Capital sejak 2020.\n\n**Struktur Pemegang Saham**\n\nStruktur kepemilikan saham PT Nusantara Sakti Capital di dalam anak usahanya menunjukkan konsistensi dan komitmen jangka panjang. PT Nusantara Sakti Capital memegang 52% saham Graha Pratama sejak 2005. Kepemilikan di PT Cahaya Teguh mencapai 64% saham yang telah dipegang sejak 2021. Untuk PT Bintang Sentosa, PT Nusantara Sakti Capital memegang 61% saham sejak 2009. Sementara itu, di PT Jaya Kencana Tbk, PT Nusantara Sakti Capital memegang 62% saham sejak 2006. Selain kepemilikan oleh PT Nusantara Sakti Capital, terdapat pemegang saham lain di PT Jaya Kencana Tbk, yaitu Gemilang Nirwana Capital yang memegang 8% saham sejak 2020.\n\n**Susunan Dewan Direksi dan Komisaris**\n\n**PT Bintang Sentosa**\nPimpinan tertinggi PT Bintang Sentosa dipegang oleh Karya Thamrin yang menjabat sebagai Direktur Utama sejak 2013. Jabatan Komisaris Utama di perusahaan ini diemban oleh Nova Kusmawati sejak 2021. Selain itu, Jaswadi Salahudin menjabat sebagai Direktur sejak 2010.\n\n**PT Jaya Kencana Tbk**\nDireksi PT Jaya Kencana Tbk dipimpin oleh Galih Sitompul sebagai Direktur Utama sejak 2011. Ega Kusumo menjabat sebagai Direktur Keuangan sejak 2015, sementara Mustika Megantara menjabat sebagai Direktur Operasional sejak 2014. Di sisi pengawasan, Gada Dongoran menjabat sebagai Komisaris Utama sejak 2020, dan Pranata Iswahyudi menjabat sebagai Komisaris Independen sejak 2012.",
+        "score": 0.6647716164588928
+      },
+      {
+        "chunk_id": "doc_098:0000",
+        "doc_id": "doc_098",
+        "text": "# Nusantara Sakti Group: Structural Overview\n\nWe observe that the Nusantara Sakti Group comprises a diverse portfolio of entities. PT Tunas Teguh is a member of the Nusantara Sakti Group. PT Citra Kencana is a member of the Nusantara Sakti Group. PT Cahaya Teguh is a member of the Nusantara Sakti Group. JKEX is a member of the Nusantara Sakti Group. PT Graha Pratama is a member of the Nusantara Sakti Group. Citra Lancar is a member of the Nusantara Sakti Group. PT Gemilang Sukses Tbk is a member of the Nusantara Sakti Group.",
+        "score": 0.44763851165771484
+      }
+    ],
+    "abstained": false,
+    "mode": "graph_local",
+    "latency_ms": 17655,
+    "claims": [
+      {
+        "text": "According to, Zaenab Thamrin has served as the Direktur Utama of PT Cahaya Teguh since 2015.",
+        "chunk_ids": [
+          "doc_061:0001"
+        ],
+        "supported": true
+      },
+      {
+        "text": "According to, Zaenab Thamrin is the spouse of Raden Prasasta.",
+        "chunk_ids": [
+          "doc_025:0000"
+        ],
+        "supported": true
+      },
+      {
+        "text": "According to, Raden Prasasta has served as the Komisaris Utama of PT Karya Semesta since 2019.",
+        "chunk_ids": [
+          "doc_056:0001"
+        ],
+        "supported": true
+      },
+      {
+        "text": "Therefore, the spouse of the Direktur Utama of Cahaya Teguh serves as Komisaris Utama at PT Karya Semesta.",
+        "chunk_ids": [],
+        "supported": false
+      }
+    ],
+    "graph_paths": [
+      {
+        "node_ids": [
+          "company_315d46c6e8",
+          "person_d7a04f43af",
+          "person_2a63131450",
+          "company_23cd5fd2dc"
+        ],
+        "node_names": [
+          "PT Cahaya Teguh",
+          "Zaenab Thamrin",
+          "Raden Prasasta",
+          "PT Karya Semesta"
+        ],
+        "rel_types": [
+          "SERVES_AS",
+          "FAMILY_OF",
+          "SERVES_AS"
+        ],
+        "chunk_ids": [
+          "doc_061:0001",
+          "doc_025:0000",
+          "doc_056:0001"
+        ],
+        "hops": [
+          {
+            "src_id": "company_315d46c6e8",
+            "src_name": "PT Cahaya Teguh",
+            "rel_type": "SERVES_AS",
+            "dst_id": "person_d7a04f43af",
+            "dst_name": "Zaenab Thamrin",
+            "chunk_ids": [
+              "doc_061:0001"
+            ],
+            "quotes": [
+              "Zaenab Thamrin menjabat sebagai Direktur Utama di PT Cahaya Teguh sejak 2015."
+            ],
+            "doc_ids": [
+              "doc_061"
+            ],
+            "forward": false
+          },
+          {
+            "src_id": "person_d7a04f43af",
+            "src_name": "Zaenab Thamrin",
+            "rel_type": "FAMILY_OF",
+            "dst_id": "person_2a63131450",
+            "dst_name": "Raden Prasasta",
+            "chunk_ids": [
+              "doc_025:0000"
+            ],
+            "quotes": [
+              "Raden Prasasta adalah pasangan suami/istri dari Zaenab Thamrin."
+            ],
+            "doc_ids": [
+              "doc_025"
+            ],
+            "forward": false
+          },
+          {
+            "src_id": "person_2a63131450",
+            "src_name": "Raden Prasasta",
+            "rel_type": "SERVES_AS",
+            "dst_id": "company_23cd5fd2dc",
+            "dst_name": "PT Karya Semesta",
+            "chunk_ids": [
+              "doc_056:0001"
+            ],
+            "quotes": [
+              "Raden Prasasta menjabat sebagai Komisaris Utama di PT Karya Semesta sejak tahun 2019."
+            ],
+            "doc_ids": [
+              "doc_056"
+            ],
+            "forward": true
+          }
+        ]
+      }
+    ],
+    "communities": [],
+    "routed_mode": null,
+    "llm_calls": 4,
+    "verify_ms": 3771,
+    "verify_calls": 1
+  },
+  "baseline": {
+    "text": "The documents do not contain this information.",
+    "citations": [],
+    "invalid_citations": [],
+    "hits": [
+      {
+        "chunk_id": "doc_061:0001",
+        "doc_id": "doc_061",
+        "text": "Ega Kusumo menjabat sebagai Direktur Keuangan sejak 2015, sementara Mustika Megantara menjabat sebagai Direktur Operasional sejak 2014. Di sisi pengawasan, Gada Dongoran menjabat sebagai Komisaris Utama sejak 2020, dan Pranata Iswahyudi menjabat sebagai Komisaris Independen sejak 2012.\n\n**PT Cahaya Teguh**\nZaenab Thamrin menjabat sebagai Direktur Utama di PT Cahaya Teguh sejak 2015. Uchita Nuraini menjabat sebagai Direktur sejak 2005. Jabatan Komisaris Utama di PT Cahaya Teguh dipegang oleh Nilam Aryani sejak 2011.\n\n**Graha Pratama**\nKadir Thamrin menjabat sebagai Direktur Utama di Graha Pratama sejak 2020. Garan Habibi menjabat sebagai Direktur sejak 2008. Yoga Mandala menjabat sebagai Komisaris Utama di Graha Pratama sejak 2014.",
+        "score": 0.9890059232711792
+      },
+      {
+        "chunk_id": "doc_039:0001",
+        "doc_id": "doc_039",
+        "text": "**Susunan Dewan dan Manajemen**\n\n**Buana Nirwana**\nMichelle Usamah telah menjabat sebagai Komisaris Utama di Buana Nirwana sejak 2005. Di jajaran direksi, Faizah Mansur mengemban amanah sebagai Direktur Utama sejak 2012. Posisi Direktur dipegang oleh Puspa Pratiwi yang telah menjabat sejak 2015.\n\n**PT Tunas Unggul Tbk**\nAjeng Mandasari menjabat sebagai Komisaris Utama di PT Tunas Unggul Tbk sejak 2011. Jajaran komisaris juga diperkuat oleh Saiful Mansur yang menjabat sebagai Komisaris sejak 2013, serta dua Komisaris Independen, yaitu Padmi Hasanah yang menjabat sejak 2015 dan Baktianto Kurniawan yang menjabat sejak 2017. Di sisi eksekutif, Michelle Usamah menjabat sebagai Direktur Utama sejak 2012. Gawati Novitasari telah mengemban tugas sebagai Direktur Keuangan sejak 2008.\n\n**PT Cahaya Berkah**\nEja Zulkarnain telah menjabat sebagai Komisaris Utama di PT Cahaya Berkah sejak 2006. Jaiman Mahendra menjabat sebagai Direktur Utama sejak 2018. Posisi Direktur di PT Cahaya Berkah dipegang oleh Lembah Kusumo yang telah menjabat sejak 2008.\n\n**PT Sinar Mulia**\nNadia Hariyah menjabat sebagai Komisaris Utama di PT Sinar Mulia sejak 2021. Saiful Mansur menjabat sebagai Direktur Utama sejak 2021. Lala Winarsih telah menjabat sebagai Direktur di PT Sinar Mulia sejak 2019.",
+        "score": 0.7323858141899109
+      },
+      {
+        "chunk_id": "doc_047:0001",
+        "doc_id": "doc_047",
+        "text": "## Susunan Dewan Direksi dan Komisaris\nKomposisi dewan pengawas dan direksi pada masing-masing anak usaha per tahun 2021 adalah sebagai berikut:\n\n### 1. Bintang Teguh\n- **Komisaris Utama**: Kamaria Puspasari (menjabat sejak 2009)\n- **Direktur Utama**: Alambana Wacana (menjabat sejak 2008)\n- **Direktur**: Karman Dabukke (menjabat sejak 2015)\n\n### 2. WTOY\n- **Komisaris Utama**: Najam Wacana (menjabat sejak 2011)\n- **Komisaris Independen**: Sari Susanti (menjabat sejak 2014)\n- **Komisaris**: Gada Dongoran (menjabat sejak 2010)\n- **Direktur Utama**: Taufik Tarihoran (menjabat sejak 2019)\n- **Direktur Keuangan**: Kartika Mandasari (menjabat sejak 2017)\n\n### 3. PT Gemilang Sakti\n- **Komisaris Utama**: Alambana Wacana (menjabat sejak 2013)\n- **Direktur Utama**: Lanjar Mangunsong (menjabat sejak 2016)\n\n### 4. PT Arta Mulia\n- **Komisaris Utama**: Cawisadi Sitorus (menjabat sejak 2018)\n- **Direktur Utama**: Ida Hastuti (menjabat sejak 2016)",
+        "score": 0.4011952579021454
+      },
+      {
+        "chunk_id": "doc_036:0000",
+        "doc_id": "doc_036",
+        "text": "# Company Profile, Board Composition and Shareholder Structure\n\nPT Sinar Mandala Investama is the principal holding entity within the group, maintaining significant control over its key operating subsidiaries. The company’s portfolio includes PT Fajar Mulia, RPFK, Harapan Abadi, and PT Rimba Kencana, all of which are classified as subsidiaries of PT Sinar Mandala Investama.\n\nPT Fajar Mulia has been a subsidiary of PT Sinar Mandala Investama since 2019. PT Sinar Mandala Investama has held a 95% stake in PT Fajar Mulia since 2013. The board of directors and commissioners for PT Fajar Mulia includes Victoria Simanjuntak, who has served as Komisaris Utama since 2008, and Hairyanto Simanjuntak, who has served as Direktur Utama since 2019.\n\nRPFK has been a subsidiary of PT Sinar Mandala Investama since 2008. In 2020, PT Sinar Mandala Investama acquired a 78% stake in RPFK. Additionally, PT Graha Makmur Sejahtera has held a 4% stake in RPFK since 2017. The leadership team at RPFK consists of Queen Anggraini, who has served as Komisaris Utama since 2017, and Nabila Nurdiyanti, who has served as Direktur Utama since 2020. The board also includes independent commissioners Yoga Mandala, who has served as Komisaris Independen since 2006, and Lanang Halim, who has served as Komisaris Independen since 2012. Virman Siregar has served as Direktur Keuangan at RPFK since 2014.\n\nHarapan Abadi has been a subsidiary of PT Sinar Mandala Investama since 2017. PT Sinar Mandala Investama has held a 70% stake in Harapan Abadi since 2011. The governance structure for Harapan Abadi features Hairyanto Simanjuntak, who has served as Komisaris Utama since 2009, and Victoria Simanjuntak, who has served as Direktur Utama since 2013.",
+        "score": 0.23080480098724365
+      },
+      {
+        "chunk_id": "doc_032:0001",
+        "doc_id": "doc_032",
+        "text": "**PT Citra Mulia**\nPelita Gemilang Capital has held a 67% stake in PT Citra Mulia since 2007.\n\n## Board Composition\n\nThe leadership teams of the group's subsidiaries are composed of experienced directors and commissioners who have served in their respective roles for varying durations.\n\n**PT Dharma Agung Tbk**\nThe board of PT Dharma Agung Tbk includes Ophelia Jailani, who has served as Direktur Utama since 2011. Lantar Natsir has served as Direktur Keuangan since 2013. The supervisory board comprises Luwes Jailani, who has served as Komisaris Utama since 2020, along with Kanda Permadi and Hilda Halimah, both of whom have served as Komisaris Independen since 2013.\n\n**Jaya Sentosa**\nVinsen Jailani has served as Direktur Utama at Jaya Sentosa since 2017. Jaiman Mahendra has served as Direktur at Jaya Sentosa since 2018. Heru Hidayat has served as Komisaris Utama at Jaya Sentosa since 2018.\n\n**PT Nusantara Teguh**\nMaryadi Thamrin has served as Direktur Utama at PT Nusantara Teguh since 2016. Ratna Haryanti has served as Direktur at PT Nusantara Teguh since 2015. Kurnia Mansur has served as Komisaris Utama at PT Nusantara Teguh since 2016.\n\n**PT Citra Mulia**\nGalang Sitompul has served as Direktur Utama at PT Citra Mulia since 2006. Eja Zulkarnain has served as Direktur at PT Citra Mulia since 2014. Luwes Jailani has served as Komisaris Utama at PT Citra Mulia since 2009.",
+        "score": 0.23071838915348053
+      },
+      {
+        "chunk_id": "doc_048:0001",
+        "doc_id": "doc_048",
+        "text": "*   Lanang Halim menjabat sebagai Direktur Operasional sejak 2016.\n    *   Dalimin Uwais menjabat sebagai Direktur Keuangan sejak 2019.\n*   **Dewan Komisaris:**\n    *   Tiara Gunawan menjabat sebagai Komisaris Utama sejak 2014.\n    *   Halim Thamrin menjabat sebagai Komisaris sejak 2015.\n    *   Wahyu Iswahyudi menjabat sebagai Komisaris Independen sejak 2019.\n\n**Gemilang Makmur**\n*   **Direksi:**\n    *   Tiara Gunawan menjabat sebagai Direktur Utama sejak 2020.\n*   **Dewan Komisaris:**\n    *   Lega Sihotang menjabat sebagai Komisaris Utama sejak 2007.\n\n**PT Tunas Mandala**\n*   **Direksi:**\n    *   Tiara Gunawan menjabat sebagai Direktur Utama sejak 2017.\n*   **Dewan Komisaris:**\n    *   Maman Gunawan menjabat sebagai Komisaris Utama sejak 2014.",
+        "score": 0.11953071504831314
+      }
+    ],
+    "abstained": true,
+    "mode": "hybrid",
+    "latency_ms": 2848,
+    "claims": [],
+    "graph_paths": [],
+    "communities": [],
+    "routed_mode": null,
+    "llm_calls": 1,
+    "verify_ms": 0,
+    "verify_calls": 0
+  }
+}

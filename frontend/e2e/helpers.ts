@@ -18,7 +18,11 @@ export { expect };
 // Fixed nav height plus breathing room, so the first heading is never under the nav.
 const NAV_CLEARANCE = 104;
 
+// The dev server's floating indicator is not part of the site.
+const HIDE_DEV_OVERLAY = "nextjs-portal{display:none!important}";
+
 export async function shoot(page: Page, project: string, section: string, anchor = `#${section}`) {
+  await page.addStyleTag({ content: HIDE_DEV_OVERLAY });
   await page.locator(anchor).first().evaluate((element, clearance) => {
     element.scrollIntoView({ block: "start", behavior: "instant" });
     window.scrollBy(0, -clearance);
@@ -31,7 +35,7 @@ export async function shoot(page: Page, project: string, section: string, anchor
 export async function shootElement(page: Page, project: string, section: string, target: Locator) {
   const nav = page.locator("header, nav").first();
   await target.scrollIntoViewIfNeeded();
-  await page.addStyleTag({ content: "[data-shot-hide]{visibility:hidden!important}" });
+  await page.addStyleTag({ content: `[data-shot-hide]{visibility:hidden!important}${HIDE_DEV_OVERLAY}` });
   await nav.evaluate((element) => element.setAttribute("data-shot-hide", ""));
   await target.screenshot({ path: `${SHOTS_DIR}/${project}-${section}.jpg`, type: "jpeg", quality: 80 });
   await nav.evaluate((element) => element.removeAttribute("data-shot-hide"));
@@ -56,12 +60,4 @@ export async function unnamedControls(page: Page) {
     };
     return [...document.querySelectorAll(selector)].filter(visible).filter((element) => !nameOf(element)).map((element) => element.outerHTML.slice(0, 160));
   });
-}
-
-// Mounts every lazy section so audits see the whole page.
-export async function loadAllSections(page: Page) {
-  for (const id of ["ask", "explore", "themes", "eval"]) {
-    await page.locator(`#${id}`).evaluate((element) => element.scrollIntoView({ behavior: "instant", block: "start" }));
-    await page.waitForTimeout(300);
-  }
 }

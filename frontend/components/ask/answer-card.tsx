@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { AnswerText, type OnCite } from "@/components/ask/answer-text";
 import { PathStrip } from "@/components/ask/path-strip";
 import { Chip } from "@/components/ui/chip";
-import { onSectionLink, writeParams } from "@/lib/sections";
 import type { Answer, Mode } from "@/lib/types";
 
 export type Run =
@@ -17,8 +16,8 @@ export type Run =
 export const MODE_LABELS: Record<Mode, string> = {
   rag: "Vector RAG",
   hybrid: "Hybrid",
-  graph_local: "Graph · local",
-  graph_global: "Graph · global",
+  graph_local: "Graph local",
+  graph_global: "Graph global",
   auto: "Auto router",
 };
 
@@ -140,11 +139,7 @@ export function AnswerCard({ mode, run, index, onCite, onCancel, onRetry }: Answ
                 {answer.communities.map((id) => (
                   <li key={id}>
                     <Link
-                      href={`/?c=${encodeURIComponent(id)}#themes`}
-                      onClick={(event) => {
-                        onSectionLink(event, "themes");
-                        if (event.defaultPrevented) writeParams({ c: id });
-                      }}
+                      href={`/themes?c=${encodeURIComponent(id)}`}
                       className="inline-flex h-7 items-center rounded-pill border border-line px-3 font-mono text-mono transition-colors duration-150 ease-std hover:bg-line">
                       {id}
                     </Link>

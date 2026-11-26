@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { MODE_LABEL, bound, fixed, signed, signedBound } from "@/components/eval/derive";
-import type { EvalDiff, EvalJudge, Mode } from "@/lib/types";
+import { ANSWERABLE, CATEGORY_LABEL, MODES, MODE_LABEL, bound, categoryN, fixed, signed, signedBound, summaryRow } from "@/components/eval/derive";
+import type { EvalDiff, EvalJudge, EvalReport, Mode } from "@/lib/types";
 
 export type ModeRow = { key: string; label: ReactNode; sub?: ReactNode; cells: Partial<Record<Mode, ReactNode>> };
 
@@ -20,7 +20,7 @@ export function ModeTable({ caption, modes, spotlight, rows, minWidth, rowHeader
                 key={mode}
                 scope="col"
                 data-spotlight={mode === spotlight || undefined}
-                className={`px-4 pt-4 pb-3 align-bottom text-ui font-medium ${mode === spotlight ? "rounded-t-panel bg-spotlight text-paper" : "text-fg-2"}`}
+                className={`px-2 pt-4 pb-3 align-bottom text-ui font-medium sm:px-4 ${mode === spotlight ? "rounded-t-panel bg-spotlight text-paper" : "text-fg-2"}`}
               >
                 {MODE_LABEL[mode]}
               </th>
@@ -40,7 +40,7 @@ export function ModeTable({ caption, modes, spotlight, rows, minWidth, rowHeader
                   <td
                     key={mode}
                     data-spotlight={mode === spotlight || undefined}
-                    className={`border-t px-4 py-3 align-top ${
+                    className={`border-t px-2 py-3 align-top sm:px-4 ${
                       mode === spotlight ? `border-paper/10 bg-spotlight text-paper ${last ? "rounded-b-panel" : ""}` : "border-line"
                     }`}
                   >
@@ -52,6 +52,7 @@ export function ModeTable({ caption, modes, spotlight, rows, minWidth, rowHeader
           })}
         </tbody>
       </table>
+      {modes.length > 3 ? <p aria-hidden="true" className="sticky left-0 pt-3 text-caption text-muted-fg sm:hidden">Scroll sideways for every mode</p> : null}
     </div>
   );
 }
@@ -71,7 +72,7 @@ export function ScoreCell({ value, low, high, best }: ScoreProps) {
         <span className="absolute inset-y-0 rounded-pill bg-current/45" style={{ left: `${low * 100}%`, width: `${Math.max(high - low, 0.01) * 100}%` }} />
         <span className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-current" style={{ left: `${value * 100}%` }} />
       </span>
-      <span className="font-mono text-caption tabular-nums opacity-75">
+      <span className="font-mono text-caption whitespace-nowrap tabular-nums opacity-75">
         <span className="sr-only">95% CI </span>
         {bound(low)}–{bound(high)}
       </span>
@@ -207,10 +208,28 @@ export function JudgeBars({ judge }: { judge: EvalJudge }) {
       </dl>
       {lengthA !== undefined && lengthB !== undefined ? (
         <p className="text-caption text-muted-fg">
-          Mean answer length: {nameA} <span className="font-mono">{lengthA.toLocaleString("en-US")}</span> chars, {nameB}{" "}
-          <span className="font-mono">{lengthB.toLocaleString("en-US")}</span> chars.
+          Mean answer length: {nameA} <span className="tabular-nums">{lengthA.toLocaleString("en-US")}</span> chars, {nameB}{" "}
+          <span className="tabular-nums">{lengthB.toLocaleString("en-US")}</span> chars.
         </p>
       ) : null}
     </div>
   );
+}
+
+export function answerRows(report: EvalReport): ModeRow[] {
+  return ANSWERABLE.map((category) => {
+    const scores = MODES.map((mode) => summaryRow(report, mode, category)?.answer_match ?? null);
+    const top = Math.max(...scores.map((score) => score ?? -1));
+    // No "best" mark when every mode ties.
+    const contested = scores.some((score) => score !== null && score < top);
+    const cells: ModeRow["cells"] = {};
+    for (const mode of MODES) {
+      const row = summaryRow(report, mode, category);
+      if (!row || row.answer_match === null || row.answer_match_ci_low === null || row.answer_match_ci_high === null) continue;
+      cells[mode] = (
+        <ScoreCell value={row.answer_match} low={row.answer_match_ci_low} high={row.answer_match_ci_high} best={contested && row.answer_match === top} />
+      );
+    }
+    return { key: category, label: CATEGORY_LABEL[category], sub: `n=${categoryN(report, category)}`, cells };
+  });
 }

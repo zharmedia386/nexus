@@ -1,12 +1,12 @@
-import { render, screen, within } from "@testing-library/react";
+import { cleanup, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { bound, fixed, headline, signed, signedBound } from "@/components/eval/derive";
 import { EvalSection } from "@/components/eval/eval-section";
+import { REPORT } from "@/lib/showcase";
 import type { EvalReport } from "@/lib/types";
-import raw from "./eval-report.fixture.json";
 
-// JSON imports widen string unions; the fixture is a trimmed copy of a real /eval/report body.
-const fixture = () => structuredClone(raw) as EvalReport;
+// Committed report for the showcase run, without examples.
+const fixture = () => structuredClone({ ...REPORT, examples: [] }) as EvalReport;
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
@@ -20,7 +20,10 @@ beforeEach(() => {
   vi.stubGlobal("matchMedia", (query: string) => ({ matches: query.includes("reduce"), media: query, addEventListener: () => {}, removeEventListener: () => {} }));
 });
 
-afterEach(() => vi.unstubAllGlobals());
+afterEach(() => {
+  cleanup();
+  vi.unstubAllGlobals();
+});
 
 const table = async (name: RegExp) => within(await screen.findByRole("table", { name }));
 
@@ -100,8 +103,8 @@ const plain = (lines: string[]) => lines.map((line) => line.replace(/\u2060/g, "
 describe("headline", () => {
   it("states the overall comparison and sign-aware category significance", () => {
     const [first, second] = plain(headline(fixture()));
-    expect(first).toContain("Graph local scores 0.66 [0.58–0.75]");
-    expect(first).toContain("+0.14 [+0.05, +0.24], significant at 95%");
+    expect(first).toContain("Graph local scores 0.70 [0.62–0.78]");
+    expect(first).toContain("+0.18 [+0.09, +0.28], significant at 95%");
     expect(second).toBe("By question type it is significantly better on 2-hop, 3-hop; significantly worse on thematic; no significant difference on single-hop, temporal.");
   });
 
@@ -111,7 +114,7 @@ describe("headline", () => {
       row.mode === "graph_local" ? { ...row, mean_diff: -row.mean_diff, ci_low: -row.ci_high, ci_high: -row.ci_low } : row,
     );
     const [first, second] = plain(headline(report));
-    expect(first).toContain("−0.14 [−0.24, −0.05], significant");
+    expect(first).toContain("−0.18 [−0.28, −0.09], significant");
     expect(second).toContain("significantly better on thematic");
     expect(second).toContain("significantly worse on 2-hop, 3-hop");
   });
@@ -137,6 +140,6 @@ describe("number formatting", () => {
   it("shows the 3-dp bound in the difference table", async () => {
     render(<EvalSection />);
     const diffs = await table(/difference against hybrid/);
-    expect(diffs.getByRole("row", { name: /Thematic/ }).textContent).toContain("[−0.43, −0.004]");
+    expect(diffs.getByRole("row", { name: /Thematic/ }).textContent).toContain("[−0.39, −0.003]");
   });
 });

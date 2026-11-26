@@ -106,6 +106,9 @@ export function caveats(report: EvalReport): string[] {
       `Graph global answers from community summaries, so it is weak on factual questions by design (single-hop ${fixed(globalSingle)} vs ${MODE_LABEL[BASELINE].toLowerCase()} ${fixed(baseSingle)}); its target is thematic questions.`,
     );
   }
+  if (report.claim_split_version) {
+    items.push(`Claim splitter ${report.claim_split_version} drops non-claim lines (headings, step labels, abstentions) before verification; this run's dropped lines were not hand-checked.`);
+  }
   const { review_marked: marked, review_rows: total } = report.dataset;
   if (marked !== undefined && total !== undefined && marked < total) {
     items.push(`Gold answers are generated from the world graph; ${marked} of ${total} questions have been human-reviewed.`);

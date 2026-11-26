@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { AnswerText, VERDICT_STYLES } from "@/components/ask/answer-text";
 import { AskView } from "@/components/ask/ask-view";
@@ -35,6 +35,7 @@ function makeAnswer(overrides: Partial<Answer> = {}): Answer {
 }
 
 afterEach(() => {
+  cleanup();
   vi.unstubAllGlobals();
   search.value = "";
 });
@@ -52,7 +53,7 @@ describe("AskView compare", () => {
     render(<AskView />);
 
     const hybrid = await screen.findByRole("article", { name: "Hybrid" });
-    const graph = screen.getByRole("article", { name: "Graph · local" });
+    const graph = screen.getByRole("article", { name: "Graph local" });
     await within(hybrid).findByText("Hybrid says PT Alpha.");
     expect(await within(graph).findByRole("alert")).toHaveTextContent("503 · neo4j down");
     expect(within(hybrid).queryByRole("alert")).toBeNull();
@@ -119,6 +120,18 @@ describe("AnswerText verdicts", () => {
 
     expect(screen.getByRole("button", { name: /doc_001:0000/ })).toHaveAttribute("data-verdict", "unsupported");
     expect(screen.getByText("Alpha").tagName).toBe("STRONG");
+  });
+});
+
+describe("AnswerText lists", () => {
+  it("keeps the source numbering when paragraphs split an ordered list", () => {
+    const answer = makeAnswer({
+      text: "Based on the documents provided:\n\n1.  **Step one:**\n    First fact.\n\n2.  **Step two:**\n    Second fact.\n\n3.  **Step three:**\n    Third fact.",
+    });
+    const { container } = render(<AnswerText answer={answer} onCite={() => {}} />);
+    const lists = [...container.querySelectorAll("ol")];
+    expect(lists).toHaveLength(3);
+    expect(lists.map((list) => list.start)).toEqual([1, 2, 3]);
   });
 });
 
@@ -255,7 +268,7 @@ describe("PathStrip leftover chunks", () => {
 
 describe("AskView URL state", () => {
   it("writes q and modes without dropping Explore's params", async () => {
-    window.history.replaceState(null, "", "/?e=c0&from=a#explore");
+    window.history.replaceState(null, "", "/ask?e=c0&from=a");
     vi.stubGlobal("fetch", vi.fn(async () => jsonResponse(makeAnswer({ text: "ok" }))));
     render(<AskView />);
 
@@ -267,7 +280,7 @@ describe("AskView URL state", () => {
     expect(url.searchParams.get("modes")).toBe("hybrid,graph_local");
     expect(url.searchParams.get("e")).toBe("c0");
     expect(url.searchParams.get("from")).toBe("a");
-    expect(url.hash).toBe("#explore");
+    expect(url.pathname).toBe("/ask");
     window.history.replaceState(null, "", "/");
   });
 

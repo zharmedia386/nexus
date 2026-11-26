@@ -13,10 +13,12 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "capture:showcase": "node --experimental-strip-types scripts/capture-showcase.ts"
   },
   "dependencies": {
     "d3-force": "^3.0.1",
+    "gsap": "3.15.1",
     "next": "16.4.6",
     "react": "19.3.0",
     "react-dom": "19.3.0"

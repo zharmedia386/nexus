@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { DEBOUNCE_MS, EntitySearch } from "@/components/graph/entity-search";
 import { ExploreView } from "@/components/graph/explore-view";
@@ -48,6 +48,7 @@ function stubApi(routes: Record<string, unknown>) {
 }
 
 afterEach(() => {
+  cleanup();
   vi.useRealTimers();
   vi.unstubAllGlobals();
   search.value = "";
@@ -195,7 +196,7 @@ describe("ExploreView", () => {
   });
 
   it("writes only its own keys, keeping Ask's q and modes", async () => {
-    window.history.replaceState(null, "", "/?q=Who&modes=rag&from=stale#ask");
+    window.history.replaceState(null, "", "/explore?q=Who&modes=rag&from=stale");
     search.value = "e=c0";
     stubApi({ "/graph/entity/c0": detail("c0", []) });
     render(<ExploreView />);
@@ -205,7 +206,7 @@ describe("ExploreView", () => {
     expect(url.searchParams.get("q")).toBe("Who");
     expect(url.searchParams.get("modes")).toBe("rag");
     expect(url.searchParams.has("from")).toBe(false);
-    expect(url.hash).toBe("#ask");
+    expect(url.pathname).toBe("/explore");
     window.history.replaceState(null, "", "/");
   });
 });
@@ -263,5 +264,32 @@ describe("EntitySearch", () => {
     });
     expect(screen.getByRole("status")).toHaveTextContent("No entity matches “nusx”.");
     expect(within(screen.getByRole("listbox", { hidden: true })).queryByText(/No entity/)).toBeNull();
+  });
+});
+
+describe("ExploreView hydration", () => {
+  it("hydrates a phone viewport without a mismatch, then shows the list", async () => {
+    const { renderToString } = await import("react-dom/server");
+    const { hydrateRoot } = await import("react-dom/client");
+    stubApi({});
+    vi.stubGlobal("ResizeObserver", class {
+      observe() {}
+      disconnect() {}
+    });
+    // The server has no matchMedia; the phone client does.
+    const html = renderToString(<ExploreView />);
+    vi.stubGlobal("matchMedia", (query: string) => ({ matches: query.includes("max-width"), media: query, addEventListener: () => {}, removeEventListener: () => {} }));
+    const container = document.createElement("div");
+    container.innerHTML = html;
+    document.body.appendChild(container);
+    const errors: unknown[] = [];
+    let root!: ReturnType<typeof hydrateRoot>;
+    await act(async () => {
+      root = hydrateRoot(container, <ExploreView />, { onRecoverableError: (error) => errors.push(error) });
+    });
+    expect(errors).toEqual([]);
+    expect(within(container).getByRole("tab", { name: "List" })).toHaveAttribute("aria-selected", "true");
+    act(() => root.unmount());
+    container.remove();
   });
 });

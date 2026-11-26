@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import { EvidenceDrawer } from "@/components/ask/evidence-drawer";
 import { PathStrip } from "@/components/ask/path-strip";
 import { EdgePanel } from "@/components/graph/edge-panel";
@@ -12,7 +12,7 @@ import { NeighbourList } from "@/components/graph/neighbour-list";
 import { Card } from "@/components/ui/card";
 import { Tabs } from "@/components/ui/tabs";
 import { ApiError, api, apiMessage } from "@/lib/api";
-import { writeParams } from "@/lib/sections";
+import { writeParams } from "@/lib/routes";
 import type { EntityDetail, EntityType, GraphPath } from "@/lib/types";
 
 type Picked = { id: string; name: string };
@@ -46,6 +46,14 @@ function CanvasMessage({ children }: { children: ReactNode }) {
   );
 }
 
+const NARROW = "(max-width: 639px)";
+
+function subscribeNarrow(onChange: () => void) {
+  const query = window.matchMedia?.(NARROW);
+  query?.addEventListener("change", onChange);
+  return () => query?.removeEventListener("change", onChange);
+}
+
 export function ExploreView() {
   const params = useSearchParams();
   const [trail, setTrail] = useState<Picked[]>(() => {
@@ -58,10 +66,10 @@ export function ExploreView() {
   const [pathLoad, setPathLoad] = useState<PathLoad | null>(null);
   const [selected, setSelected] = useState<{ centre: string; key: string; opener: SVGElement } | null>(null);
   const [evidence, setEvidence] = useState<{ chunkId: string; opener: HTMLElement } | null>(null);
-  // The client renders this view (useSearchParams bails out of prerender), so window is safe here.
-  const [view, setView] = useState<View>(() =>
-    typeof window !== "undefined" && window.matchMedia?.("(max-width: 639px)").matches ? "list" : "graph",
-  );
+  // Phones default to the list; the server snapshot is the graph, so hydration never mismatches.
+  const narrow = useSyncExternalStore(subscribeNarrow, () => window.matchMedia?.(NARROW).matches ?? false, () => false);
+  const [chosenView, setChosenView] = useState<View | null>(null);
+  const view = chosenView ?? (narrow ? "list" : "graph");
 
   // With no entity in the URL, open the best-connected one without writing it to the URL.
   const [starter, setStarter] = useState<Picked | null>(null);
@@ -263,7 +271,7 @@ export function ExploreView() {
             )}
           </ol>
         </nav>
-        <Tabs tabs={VIEWS} value={view} onChange={setView} label="Graph view" />
+        <Tabs tabs={VIEWS} value={view} onChange={setChosenView} label="Graph view" />
       </div>
 
       <div>
@@ -284,7 +292,7 @@ export function ExploreView() {
             selectedKey={selectedLink?.key ?? null}
             onSelect={(key, opener) => setSelected({ centre: graph.centre.id, key, opener })}
             onRecentre={recentre}
-            onShowList={() => setView("list")}
+            onShowList={() => setChosenView("list")}
           >
             {entityLoading ? (
               <p className="glass absolute top-3 right-3 px-3 py-1.5 text-ui">

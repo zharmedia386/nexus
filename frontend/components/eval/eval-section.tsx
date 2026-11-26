@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { DiffCell, JudgeBars, ModeTable, Ring, ScoreCell, type ModeRow } from "@/components/eval/charts";
+import { DiffCell, JudgeBars, ModeTable, Ring, answerRows, type ModeRow } from "@/components/eval/charts";
 import {
   ANSWERABLE,
   BASELINE,
@@ -10,7 +10,6 @@ import {
   MODE_LABEL,
   SPOTLIGHT,
   caveats,
-  categoryN,
   diffRow,
   fixed,
   headline,
@@ -43,24 +42,6 @@ const NotRun = ({ what }: { what: string }) => (
     <span className="font-mono text-mono">not run</span> · {what}
   </p>
 );
-
-function answerRows(report: EvalReport): ModeRow[] {
-  return ANSWERABLE.map((category) => {
-    const scores = MODES.map((mode) => summaryRow(report, mode, category)?.answer_match ?? null);
-    const top = Math.max(...scores.map((score) => score ?? -1));
-    // No "best" mark when every mode ties.
-    const contested = scores.some((score) => score !== null && score < top);
-    const cells: ModeRow["cells"] = {};
-    for (const mode of MODES) {
-      const row = summaryRow(report, mode, category);
-      if (!row || row.answer_match === null || row.answer_match_ci_low === null || row.answer_match_ci_high === null) continue;
-      cells[mode] = (
-        <ScoreCell value={row.answer_match} low={row.answer_match_ci_low} high={row.answer_match_ci_high} best={contested && row.answer_match === top} />
-      );
-    }
-    return { key: category, label: CATEGORY_LABEL[category], sub: `n=${categoryN(report, category)}`, cells };
-  });
-}
 
 function diffRows(report: EvalReport, domain: number): ModeRow[] {
   return ANSWERABLE.map((category) => {

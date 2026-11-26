@@ -221,6 +221,7 @@ export type EvalReport = {
   graph?: {
     timestamp: string;
     docs: number;
+    dropped_unverified: number;
     entity_macro: PrfScore;
     entity_micro: PrfScore;
     relations: {
@@ -252,6 +253,8 @@ export type EvalReport = {
     entities: Partial<Record<EntityType, number>>;
     edges: Partial<Record<RelType, number>>;
     docs: Record<string, Record<string, number>>;
+    hidden_paths: number;
+    name_collisions: number;
     review_rows?: number;
     review_marked?: number;
   };

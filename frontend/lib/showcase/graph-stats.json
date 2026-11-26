@@ -1,0 +1,43 @@
+{
+  "nodes": 375,
+  "relationships": 1142,
+  "by_type": {
+    "Company": 150,
+    "Group": 8,
+    "Location": 1,
+    "Person": 207,
+    "Sector": 9
+  },
+  "top": [
+    {
+      "id": "company_5392a9d6f6",
+      "name": "PT Mulia Lancar Capital",
+      "type": "Company",
+      "degree": 34
+    },
+    {
+      "id": "company_8dc8cdd92e",
+      "name": "PT Nusantara Sakti Capital",
+      "type": "Company",
+      "degree": 33
+    },
+    {
+      "id": "company_c7823cfc54",
+      "name": "PT Sinar Semesta Capital",
+      "type": "Company",
+      "degree": 33
+    },
+    {
+      "id": "company_d4e244bdb6",
+      "name": "Mega Sentosa Capital",
+      "type": "Company",
+      "degree": 33
+    },
+    {
+      "id": "company_dab04ad4e9",
+      "name": "PT Bumi Sentosa Capital",
+      "type": "Company",
+      "degree": 33
+    }
+  ]
+}

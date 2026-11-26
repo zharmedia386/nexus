@@ -1,0 +1,29 @@
+# id<TAB>text (written for the ear; numbers spelled the way they should be read)
+L01	Here's a question about a set of company filings. Every company and person in them is made up.
+L02	Plain RAG searches the filings, and says the answer isn't there.
+L03	It is there. It's just split across three documents.
+L04	One says who runs Cahaya Teguh. Another names her spouse. A third says which board that spouse chairs.
+L05	NEXUS turns the filings into a graph first.
+L06	Ask again, with hybrid search alongside. Hybrid still comes back empty.
+L07	Graph local takes about twenty seconds, because it walks the graph.
+L08	From Cahaya Teguh, to its Direktur Utama, Zaenab Thamrin.
+L09	Then to her spouse, Raden Prasasta.
+L10	Then to PT Karya Semesta, where Raden Prasasta has been Komisaris Utama since 2019.
+L11	Every hop cites its sentence. Open one, and there's the source.
+L12	Explore opens the same graph by hand. This is Zaenab Thamrin's neighbourhood.
+L13	Themes groups it into communities, each with a written summary.
+L14	On a hundred and twelve answerable questions, graph local matched the gold answer seventy percent of the time. Hybrid, fifty-two.
+L15	The paired difference is plus point one eight, with a ninety-five percent interval from point zero nine to point two eight.
+L16	It doesn't win everything. On thematic questions, hybrid leads, point eight four to point six six.
+L17	Underneath: Neo4j, Milvus and Postgres, with LangGraph, FastAPI and Next.js.
+L18	All of it runs on your machine. The code is on GitHub.
+# split takes for lines whose full take scored synth > 0.2
+L04a	One says who runs Cahaya Teguh.
+L04b	Another names her spouse.
+L04c	A third says which board that spouse chairs.
+L10a	Then to PT Karya Semesta,
+L10b	where Raden Prasasta has been Komisaris Utama since 2019.
+L14a	On a hundred and twelve answerable questions, graph local matched the gold answer seventy percent of the time.
+L14b	Hybrid, fifty-two.
+L16a	It doesn't win everything.
+L16b	On thematic questions, hybrid leads, point eight four to point six six.

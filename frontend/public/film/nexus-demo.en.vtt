@@ -1,0 +1,93 @@
+WEBVTT
+
+1
+00:00.290 --> 00:05.832
+Here's a question about a set of company filings. Every company and person in them is made up.
+
+2
+00:06.112 --> 00:09.650
+Plain RAG searches the filings, and says the answer isn't there.
+
+3
+00:10.512 --> 00:13.334
+It is there. It's just split across three documents.
+
+4
+00:13.722 --> 00:15.624
+One says who runs Cahaya Teguh.
+
+5
+00:16.205 --> 00:17.680
+Another names her spouse.
+
+6
+00:18.108 --> 00:20.373
+A third says which board that spouse chairs.
+
+7
+00:20.820 --> 00:23.409
+NEXUS turns the filings into a graph first.
+
+8
+00:24.924 --> 00:29.368
+Ask again, with hybrid search alongside. Hybrid still comes back empty.
+
+9
+00:30.119 --> 00:33.818
+Graph local takes about twenty seconds, because it walks the graph.
+
+10
+00:37.316 --> 00:40.909
+From Cahaya Teguh, to its Direktur Utama, Zaenab Thamrin.
+
+11
+00:41.424 --> 00:43.617
+Then to her spouse, Raden Prasasta.
+
+12
+00:44.114 --> 00:46.062
+Then to PT Karya Semesta,
+
+13
+00:46.520 --> 00:50.874
+where Raden Prasasta has been Komisaris Utama since 2019.
+
+14
+00:52.316 --> 00:56.057
+Every hop cites its sentence. Open one, and there's the source.
+
+15
+00:58.904 --> 01:03.540
+Explore opens the same graph by hand. This is Zaenab Thamrin's neighbourhood.
+
+16
+01:05.071 --> 01:08.503
+Themes groups it into communities, each with a written summary.
+
+17
+01:10.334 --> 01:16.452
+On 112 answerable questions, graph local matched the gold answer 70% of the time.
+
+18
+01:16.725 --> 01:18.064
+Hybrid, 52%.
+
+19
+01:18.599 --> 01:25.256
+The paired difference is +0.18, with a 95% interval from +0.09 to +0.28.
+
+20
+01:25.908 --> 01:27.357
+It doesn't win everything.
+
+21
+01:27.912 --> 01:32.207
+On thematic questions, hybrid leads, 0.84 to 0.66.
+
+22
+01:33.007 --> 01:38.726
+Underneath: Neo4j, Milvus and Postgres, with LangGraph, FastAPI and Next.js.
+
+23
+01:39.334 --> 01:42.483
+All of it runs on your machine. The code is on GitHub.

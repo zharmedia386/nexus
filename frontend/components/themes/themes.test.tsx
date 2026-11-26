@@ -1,10 +1,11 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ThemesSection } from "@/components/themes/themes-section";
 import type { Community } from "@/lib/types";
 
 const search = vi.hoisted(() => ({ value: "" }));
-vi.mock("next/navigation", () => ({ useSearchParams: () => new URLSearchParams(search.value) }));
+const push = vi.hoisted(() => vi.fn());
+vi.mock("next/navigation", () => ({ useSearchParams: () => new URLSearchParams(search.value), useRouter: () => ({ push }) }));
 
 const json = (body: unknown) =>
   new Response(JSON.stringify(body), { status: 200, headers: { "Content-Type": "application/json" } });
@@ -39,8 +40,10 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  cleanup();
   vi.unstubAllGlobals();
   scrollIntoView.mockReset();
+  push.mockReset();
   search.value = "";
   window.history.replaceState(null, "", "/");
 });
@@ -62,17 +65,11 @@ describe("ThemesSection", () => {
     expect(screen.getByText("Sub theme")).toBeTruthy();
   });
 
-  it("member chip writes ?e and targets #explore", async () => {
-    const explore = document.createElement("section");
-    explore.id = "explore";
-    document.body.append(explore);
+  it("member chip opens Explore on that entity", async () => {
     render(<ThemesSection />);
     fireEvent.click((await screen.findAllByRole("button", { name: /sub-themes and members|Members/ }))[0]);
     fireEvent.click(screen.getAllByRole("button", { name: "Member of big" })[0]);
-    expect(new URL(window.location.href).searchParams.get("e")).toBe("big-m1");
-    expect(window.location.hash).toBe("#explore");
-    expect(scrollIntoView).toHaveBeenCalled();
-    explore.remove();
+    expect(push).toHaveBeenCalledWith("/explore?e=big-m1");
   });
 
   it("?c expands the matching card", async () => {

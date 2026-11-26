@@ -1,0 +1,28 @@
+{
+  "duration": 103.6,
+  "lines": [
+    { "take": "L01", "t": 0.0, "text": "Here's a question about a set of company filings. Every company and person in them is made up." },
+    { "take": "L02", "t": 5.8, "text": "Plain RAG searches the filings, and says the answer isn't there." },
+    { "take": "L03", "t": 10.2, "text": "It is there. It's just split across three documents." },
+    { "take": "L04a", "t": 13.4, "text": "One says who runs Cahaya Teguh." },
+    { "take": "L04b", "t": 15.9, "text": "Another names her spouse." },
+    { "take": "L04c", "t": 17.8, "text": "A third says which board that spouse chairs." },
+    { "take": "L05", "t": 20.5, "text": "NEXUS turns the filings into a graph first." },
+    { "take": "L06", "t": 24.6, "text": "Ask again, with hybrid search alongside. Hybrid still comes back empty." },
+    { "take": "L07", "t": 29.8, "text": "Graph local takes about twenty seconds, because it walks the graph." },
+    { "take": "L08", "t": 37.0, "text": "From Cahaya Teguh, to its Direktur Utama, Zaenab Thamrin." },
+    { "take": "L09", "t": 41.1, "text": "Then to her spouse, Raden Prasasta." },
+    { "take": "L10a", "t": 43.8, "text": "Then to PT Karya Semesta," },
+    { "take": "L10b", "t": 46.2, "text": "where Raden Prasasta has been Komisaris Utama since 2019." },
+    { "take": "L11", "t": 52.0, "text": "Every hop cites its sentence. Open one, and there's the source." },
+    { "take": "L12", "t": 58.6, "text": "Explore opens the same graph by hand. This is Zaenab Thamrin's neighbourhood." },
+    { "take": "L13", "t": 64.7, "text": "Themes groups it into communities, each with a written summary." },
+    { "take": "L14a", "t": 70.0, "text": "On 112 answerable questions, graph local matched the gold answer 70% of the time." },
+    { "take": "L14b", "t": 76.4, "text": "Hybrid, 52%." },
+    { "take": "L15", "t": 78.3, "text": "The paired difference is +0.18, with a 95% interval from +0.09 to +0.28." },
+    { "take": "L16a", "t": 85.6, "text": "It doesn't win everything." },
+    { "take": "L16b", "t": 87.6, "text": "On thematic questions, hybrid leads, 0.84 to 0.66." },
+    { "take": "L17-s105", "t": 92.7, "text": "Underneath: Neo4j, Milvus and Postgres, with LangGraph, FastAPI and Next.js." },
+    { "take": "L18", "t": 99.0, "text": "All of it runs on your machine. The code is on GitHub." }
+  ]
+}

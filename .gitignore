@@ -7,3 +7,13 @@ eval/runs/*.json
 .pytest_cache/
 .ruff_cache/
 eval/runs/*.partial.jsonl
+
+# film: raw captures, takes and render intermediates (regenerate with film/README.md)
+film/capture/raw/
+film/vo/takes/
+film/vo/scores/
+film/vo/*.wav
+film/composition/clips/
+film/composition/plates/
+film/build/
+film/look/

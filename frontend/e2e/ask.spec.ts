@@ -1,7 +1,7 @@
 import { expect, shootElement, test, unnamedControls } from "./helpers";
 
 test("ask: hybrid vs graph_local on the multi-hop example, path strip and evidence drawer", async ({ page }, testInfo) => {
-  await page.goto("/#ask");
+  await page.goto("/ask");
   const ask = page.locator("#ask");
   // Default modes are hybrid + graph_local.
   await expect(ask.getByRole("button", { name: "hybrid", exact: true })).toHaveAttribute("aria-pressed", "true");

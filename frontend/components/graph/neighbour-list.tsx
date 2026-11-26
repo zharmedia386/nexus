@@ -33,7 +33,7 @@ export function NeighbourList({ graph, onRecentre, onCite }: NeighbourListProps)
               {link.relations.map((relation, index) => (
                 <li key={index} className="flex flex-col gap-1.5">
                   <p className="text-ui text-fg-2">
-                    {relation.sourceName} <span className="font-mono text-fg">—{relLabel(relation.type)}→</span> {relation.targetName}
+                    {relation.sourceName} <span className="font-mono text-fg">─{relLabel(relation.type)}→</span> {relation.targetName}
                     {relation.role ? <span className="text-muted-fg"> · {relation.role}</span> : null}
                     {relation.pct !== null ? <span className="text-muted-fg"> · {relation.pct}%</span> : null}
                     {relation.since !== null || relation.until !== null ? (

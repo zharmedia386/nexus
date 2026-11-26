@@ -293,6 +293,18 @@
   --muted-fg: var(--fg-2);
 }
 
+/* Reserves the final text's box (data-final) so count-ups and typing never shift layout. */
+@utility sizer {
+  &::before {
+    content: attr(data-final);
+    visibility: hidden;
+    grid-area: 1 / 1;
+  }
+  & > * {
+    grid-area: 1 / 1;
+  }
+}
+
 /* Shimmer text (transitions-dev): data-text duplicates the label for the sweeping band. */
 .t-shimmer {
   position: relative;

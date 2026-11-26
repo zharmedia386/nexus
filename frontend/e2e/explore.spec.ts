@@ -1,7 +1,7 @@
 import { expect, shoot, test, unnamedControls } from "./helpers";
 
 test("explore: default entity, search, path finder", async ({ page }, testInfo) => {
-  await page.goto("/#explore");
+  await page.goto("/explore");
   const explore = page.locator("#explore");
   await expect(explore.locator("#graph-canvas, [aria-labelledby=neighbour-list-title]")).toBeVisible({ timeout: 30_000 });
   await expect(explore.locator('nav[aria-label="Exploration history"] [aria-current="page"]')).not.toHaveText("…", { timeout: 30_000 });
@@ -24,7 +24,7 @@ test("explore: default entity, search, path finder", async ({ page }, testInfo) 
 });
 
 test("themes: expand first card, member chip opens Explore on that entity", async ({ page }, testInfo) => {
-  await page.goto("/#themes");
+  await page.goto("/themes");
   const themes = page.locator("#themes");
   const toggle = themes.locator('button[aria-controls^="community-panel-"]').first();
   await expect(toggle).toBeVisible({ timeout: 30_000 });

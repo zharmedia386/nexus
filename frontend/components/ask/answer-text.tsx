@@ -49,7 +49,7 @@ export function verdictFor(chunkId: string, sentence: string, answer: Answer): V
 
 type Block =
   | { kind: "p" | "h"; line: string }
-  | { kind: "ul" | "ol"; items: string[] }
+  | { kind: "ul" | "ol"; items: string[]; start?: number }
   | { kind: "cites"; ids: string[] };
 
 function toBlocks(text: string): Block[] {
@@ -68,7 +68,8 @@ function toBlocks(text: string): Block[] {
       const kind = ORDERED_MARKER.test(line) ? "ol" : "ul";
       const item = line.replace(LIST_MARKER, "");
       if (last?.kind === kind) last.items.push(item);
-      else blocks.push({ kind, items: [item] });
+      // Paragraphs between items split one list into several; keep the model's own numbers.
+      else blocks.push({ kind, items: [item], start: kind === "ol" ? parseInt(line, 10) : undefined });
     } else {
       blocks.push({ kind: "p", line });
     }
@@ -199,7 +200,7 @@ export function AnswerText({ answer, onCite }: AnswerTextProps) {
           case "ol": {
             const List = block.kind;
             return (
-              <List key={key} style={style} className={`${motion} flex flex-col gap-1.5 pl-5 ${block.kind === "ol" ? "list-decimal" : "list-disc"} marker:text-ash`}>
+              <List key={key} start={block.start} style={style} className={`${motion} flex flex-col gap-1.5 pl-5 ${block.kind === "ol" ? "list-decimal" : "list-disc"} marker:text-ash`}>
                 {block.items.map((item, itemIndex) => <li key={itemIndex} className="pl-1">{line(item, `${key}-${itemIndex}`)}</li>)}
               </List>
             );

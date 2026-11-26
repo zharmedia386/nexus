@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { IBM_Plex_Mono, Inter_Tight } from "next/font/google";
-import { SiteNav } from "@/components/site-nav";
+import { SiteFooter } from "@/components/site/site-footer";
+import { SiteNav } from "@/components/site/site-nav";
+import { RUN_ID } from "@/lib/showcase";
 import { THEME_SCRIPT } from "@/lib/theme";
 import "./globals.css";
 
@@ -39,10 +41,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <main id="main" tabIndex={-1} className="outline-none">
           {children}
         </main>
-        <footer className="mx-auto flex max-w-content flex-wrap justify-between gap-2 px-6 py-10 text-ui text-muted-fg">
-          <span>NEXUS · local-first GraphRAG</span>
-          <span>All companies and people are fictional.</span>
-        </footer>
+        <SiteFooter runId={RUN_ID} />
       </body>
     </html>
   );

@@ -83,7 +83,7 @@ export function EdgePanel({ link, onClose, onCite }: EdgePanelProps) {
           {link.relations.map((relation, index) => (
             <li key={`${relation.type}-${index}`} className="flex flex-col gap-3">
               <p className="text-body">
-                {relation.sourceName} <span className="font-mono text-mono text-paper/70">—{relLabel(relation.type)}→</span> {relation.targetName}
+                {relation.sourceName} <span className="font-mono text-mono text-paper/70">─{relLabel(relation.type)}→</span> {relation.targetName}
               </p>
               {details(relation).length ? (
                 <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-ui">

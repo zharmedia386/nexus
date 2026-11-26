@@ -1,12 +1,11 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { CITATION_PATTERN, CitationChip, type OnCite } from "@/components/ask/answer-text";
 import { EvidenceDrawer } from "@/components/ask/evidence-drawer";
 import { Card } from "@/components/ui/card";
 import { api, apiMessage } from "@/lib/api";
-import { cancelSectionSettle, scrollToSection, writeParams } from "@/lib/sections";
 import type { Community } from "@/lib/types";
 
 type Load =
@@ -44,6 +43,7 @@ function Summary({ text, onCite }: { text: string; onCite: OnCite }) {
 }
 
 function MemberChips({ community }: { community: Community }) {
+  const router = useRouter();
   const hidden = community.size - community.member_names.length;
   return (
     <ul aria-label={`Members of ${community.title ?? community.id}`} className="flex flex-wrap gap-1.5">
@@ -54,8 +54,7 @@ function MemberChips({ community }: { community: Community }) {
             <button
               type="button"
               onClick={() => {
-                writeParams({ e: id });
-                scrollToSection("explore");
+                router.push(`/explore?e=${encodeURIComponent(id)}`);
               }}
               className="inline-flex h-7 items-center rounded-pill border border-line px-3 text-ui transition-colors duration-150 ease-std hover:bg-line"
             >
@@ -169,7 +168,6 @@ export function ThemesSection() {
     if (!target || !targetRoot) return;
     // Wait a frame so the opened panel is in the layout before centring.
     const frame = requestAnimationFrame(() => {
-      cancelSectionSettle();
       document.getElementById(`community-${target}`)?.scrollIntoView({ block: "start" });
     });
     return () => cancelAnimationFrame(frame);

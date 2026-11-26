@@ -5,7 +5,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnswerCard, MODE_LABELS, type Run } from "@/components/ask/answer-card";
 import { EvidenceDrawer } from "@/components/ask/evidence-drawer";
 import { api, apiMessage } from "@/lib/api";
-import { writeParams } from "@/lib/sections";
+import { writeParams } from "@/lib/routes";
 import type { Mode } from "@/lib/types";
 
 const MODES: Mode[] = ["rag", "hybrid", "graph_local", "graph_global", "auto"];

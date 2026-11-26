@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NEXUS demo film</title>
+<meta name="viewport" content="width=1920, height=1080">
+<style>
+/* ACCENT = evidence: the light blue of the product's citation highlight marks what a source proves. */
+@font-face { font-family: "Inter Tight"; src: url("fonts/inter-tight-latin.woff2") format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Plex Mono"; src: url("fonts/plex-mono-latin-400.woff2") format("woff2"); font-weight: 400; }
+:root {
+  --night: #101417;
+  --page: #0a0a0a;
+  --paper: #ffffff;
+  --mist: #e4e4e7;
+  --ash: #a1a1aa;
+  --accent: #17445f;
+  --evidence: #7fb2d6;
+  --sans: "Inter Tight", system-ui, sans-serif;
+  --mono: "Plex Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+#main { position: absolute; inset: 0; overflow: hidden; background: var(--night); color: var(--paper); font-family: var(--sans); font-weight: 400; }
+.scene { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.world { background: radial-gradient(70% 80% at 85% -10%, #17445fcc 0%, transparent 62%), radial-gradient(60% 70% at 10% 110%, #17445f55 0%, transparent 60%), var(--night); }
+video, .plate { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: block; }
+.cursor { position: absolute; left: 0; top: 0; width: 30px; height: 40px; transform-origin: 0 0; filter: drop-shadow(0 2px 4px #0008); }
+
+/* documents */
+#docs { width: 3700px; }
+.doc { position: absolute; top: 250px; width: 820px; }
+.doc .cap { font-family: var(--mono); font-size: 24px; color: var(--ash); margin-bottom: 26px; white-space: nowrap; }
+.doc .cap b { color: var(--paper); font-weight: 400; }
+.doc p { margin: 0; font-size: 42px; line-height: 62px; color: #ffffff66; letter-spacing: -0.005em; }
+.doc p b { font-weight: 600; color: #ffffff8c; }
+.doc .key { color: #ffffffcc; --hl: 0%; background-image: linear-gradient(#7fb2d652, #7fb2d652); background-repeat: no-repeat; background-size: var(--hl) 100%; -webkit-box-decoration-break: clone; box-decoration-break: clone; padding: 0 4px; border-radius: 4px; }
+
+/* graph */
+#field { position: absolute; left: -240px; top: -240px; width: 2400px; height: 1560px; }
+.pin { position: absolute; width: 640px; height: 70px; display: flex; align-items: center; justify-content: center; }
+.pill { display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 22px; border-radius: 999px; border: 1.5px solid #ffffff38; background: #16191ccc; font-size: 30px; color: var(--paper); white-space: nowrap; }
+.pill i { width: 10px; height: 10px; border-radius: 50%; background: var(--paper); opacity: .7; }
+.pill.answer { border-color: var(--evidence); box-shadow: 0 0 0 6px #7fb2d61f, 0 0 40px #7fb2d633; }
+.pill.answer i { background: var(--evidence); opacity: 1; }
+.rel { display: flex; flex-direction: column; align-items: center; gap: 8px; font-family: var(--mono); white-space: nowrap; }
+.rel span:first-child { font-size: 24px; line-height: 32px; text-align: center; color: var(--mist); }
+.rel span:last-child { font-size: 19px; color: var(--evidence); border: 1px solid #7fb2d655; border-radius: 999px; padding: 2px 12px; }
+#tally { position: absolute; left: 0; width: 1920px; top: 930px; text-align: center; font-family: var(--mono); font-size: 32px; color: var(--mist); white-space: pre; }
+#tally em { font-style: normal; color: var(--ash); }
+
+/* overlays on captures */
+.ring { position: absolute; border: 2.5px solid var(--evidence); border-radius: 10px; box-shadow: 0 0 0 6px #7fb2d61a; }
+.call { position: absolute; display: flex; align-items: center; gap: 12px; height: 46px; padding: 0 16px; border-radius: 999px; background: var(--accent); border: 1px solid #7fb2d680; font-family: var(--mono); font-size: 26px; color: var(--paper); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.call small { font-size: 20px; color: #ffffffb3; }
+
+/* close */
+.line { position: absolute; left: 0; width: 1920px; text-align: center; white-space: pre; }
+#stack span[id] { display: inline-block; white-space: pre; }
+#stack { top: 420px; font-size: 64px; letter-spacing: -0.015em; }
+#stack .sep { color: #ffffff4d; }
+#models { top: 530px; font-family: var(--mono); font-size: 30px; color: var(--ash); }
+#runs { top: 610px; font-size: 92px; letter-spacing: -0.02em; }
+#repo { top: 745px; font-family: var(--mono); font-size: 40px; color: var(--evidence); }
+</style>
+</head>
+<body>
+<div id="main">
+
+  <!-- A  cold open: real capture, rag mode abstains -->
+  <section id="sA" class="scene" style="visibility:hidden"><div id="camA" class="cam">
+    <video id="vA" src="clips/a-abstain.mp4" data-start="0" data-media-start="0.2" muted playsinline preload="auto"></video>
+    <svg id="curA" class="cursor" viewBox="0 0 30 40"><path d="M2 2v30l8-8 6 13 5-2-6-13h11z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/></svg>
+  </div></section>
+
+  <!-- B  the three facts, verbatim from the three chunks the answer cites -->
+  <section id="sB" class="scene world" style="visibility:hidden"><div id="docs" class="cam">
+    <div class="doc" id="doc1" style="left:80px"><div class="cap"><b>doc_061:0001</b> · Laporan Tahunan PT Nusantara Sakti Capital 2023</div>
+      <p><b>PT Cahaya Teguh</b> <span class="key">Zaenab Thamrin menjabat sebagai Direktur Utama di PT Cahaya Teguh sejak 2015.</span> Uchita Nuraini menjabat sebagai Direktur sejak 2005.</p></div>
+    <div class="doc" id="doc2" style="left:1480px"><div class="cap"><b>doc_025:0000</b> · Profil Prayitna Prasasta</div>
+      <p>Raden Prasasta adalah saudara kandung Oni Prasasta. <span class="key">Raden Prasasta adalah pasangan suami/istri dari Zaenab Thamrin.</span></p></div>
+    <div class="doc" id="doc3" style="left:2880px"><div class="cap"><b>doc_056:0001</b> · Laporan Tahunan 2021</div>
+      <p><b>PT Karya Semesta</b> · <b>Dewan Komisaris:</b> <span class="key">Raden Prasasta menjabat sebagai Komisaris Utama di PT Karya Semesta sejak tahun 2019.</span></p></div>
+  </div></section>
+
+  <!-- C + E  the extracted graph (real type counts, illustrative layout) and the hop-by-hop walk -->
+  <section id="sC" class="scene world" style="visibility:hidden"><div id="camG" class="cam">
+    <div id="fieldWrap" style="position:absolute;inset:0;--r:0px;clip-path:circle(var(--r) at 975px 555px)">
+      <svg id="field" viewBox="-240 -240 2400 1560"></svg>
+    </div>
+    <svg id="walk" viewBox="0 0 1920 1080" style="position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:visible">
+      <line id="e0" x1="470" y1="600" x2="850" y2="450" pathLength="1" stroke="#e4e4e7" stroke-width="2.5" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <line id="e1" x1="850" y1="450" x2="1150" y2="660" pathLength="1" stroke="#e4e4e7" stroke-width="2.5" stroke-dasharray="1" stroke-dashoffset="1"/>
+      <line id="e2" x1="1150" y1="660" x2="1480" y2="460" pathLength="1" stroke="#7fb2d6" stroke-width="2.5" stroke-dasharray="1" stroke-dashoffset="1"/>
+    </svg>
+    <div class="pin" id="n0" style="left:150px;top:565px"><span class="pill"><i></i>PT Cahaya Teguh</span></div>
+    <div class="pin" id="n1" style="left:530px;top:415px"><span class="pill"><i></i>Zaenab Thamrin</span></div>
+    <div class="pin" id="n2" style="left:830px;top:625px"><span class="pill"><i></i>Raden Prasasta</span></div>
+    <div class="pin" id="n3" style="left:1160px;top:425px"><span class="pill answer"><i></i>PT Karya Semesta</span></div>
+    <div class="pin" id="r0" style="left:280px;top:360px;height:140px"><div class="rel"><span>Direktur Utama<br>since 2015</span><span>doc_061:0001</span></div></div>
+    <div class="pin" id="r1" style="left:610px;top:600px;height:100px"><div class="rel"><span>spouse</span><span>doc_025:0000</span></div></div>
+    <div class="pin" id="r2" style="left:1100px;top:570px;height:140px"><div class="rel"><span>Komisaris Utama<br>since 2019</span><span>doc_056:0001</span></div></div>
+    <div id="tally"><span id="nEnt">0</span> entities  <em>·</em>  <span id="nRel">0</span> relations  <em>·</em>  <em>extracted graph</em></div>
+  </div></section>
+
+  <!-- D  real capture: hybrid beside graph_local, the wait cut down, the answer -->
+  <section id="sD" class="scene" style="visibility:hidden"><div id="camD" class="cam">
+    <video id="vD1" src="clips/b-ask.mp4" data-start="24.6" data-media-start="0.6" muted playsinline preload="auto"></video>
+    <video id="vD2" src="clips/b-ask.mp4" data-start="32.6" data-media-start="23.1" muted playsinline preload="auto"></video>
+  </div></section>
+
+  <!-- F  real capture: open a hop, then the cited chunk -->
+  <section id="sF" class="scene" style="visibility:hidden"><div id="camF" class="cam">
+    <video id="vF" src="clips/b-ask.mp4" data-start="51.4" data-media-start="33.9" muted playsinline preload="auto"></video>
+    <div id="ringF" class="ring" style="left:1398px;top:580px;width:462px;height:56px"></div>
+    <svg id="curF" class="cursor" viewBox="0 0 30 40"><path d="M2 2v30l8-8 6 13 5-2-6-13h11z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/></svg>
+  </div></section>
+
+  <!-- G  real capture: Explore -->
+  <section id="sG" class="scene" style="visibility:hidden"><div id="camGx" class="cam">
+    <video id="vG" src="clips/c-explore.mp4" data-start="58.5" data-media-start="1.9" muted playsinline preload="auto"></video>
+    <svg id="curG" class="cursor" viewBox="0 0 30 40"><path d="M2 2v30l8-8 6 13 5-2-6-13h11z" fill="#fff" stroke="#000" stroke-width="2" stroke-linejoin="round"/></svg>
+  </div></section>
+
+  <!-- H  real capture: Themes, then the 2x screenshot of the same scroll position for the push-in -->
+  <section id="sH" class="scene" style="visibility:hidden"><div id="camH" class="cam">
+    <video id="vH" src="clips/d-themes.mp4" data-start="64.6" data-media-start="1.6" muted playsinline preload="auto"></video>
+    <img id="plH" class="plate" src="plates/themes-cards.png" alt="">
+  </div></section>
+
+  <!-- I  real capture: Benchmarks, then its 2x screenshot with callouts that land on the report's values -->
+  <section id="sI" class="scene" style="visibility:hidden"><div id="camI" class="cam">
+    <video id="vI" src="clips/e-benchmarks.mp4" data-start="69.6" data-media-start="2.2" muted playsinline preload="auto"></video>
+    <img id="plI" class="plate" src="plates/benchmarks-chart.png" alt="">
+    <div id="cN" class="call" style="left:414px;top:186px">112<small>answerable ·</small>136<small>questions</small></div>
+    <div id="cGl" class="call" style="left:1000px;top:190px"><small>graph local</small><span id="vGl">0.00</span></div>
+    <div id="cHy" class="call" style="left:1250px;top:190px"><small>hybrid</small><span id="vHy">0.00</span></div>
+    <div id="cDf" class="call" style="left:600px;top:72px"><small>paired diff</small><span id="vDf">+0.00</span></div>
+    <div id="ringCi" class="ring" style="left:404px;top:150px;width:160px;height:28px;border-radius:6px"></div>
+    <div id="ringTh1" class="ring" style="left:778px;top:884px;width:82px;height:34px;border-radius:6px"></div>
+    <div id="ringTh2" class="ring" style="left:953px;top:884px;width:70px;height:34px;border-radius:6px;border-color:#a1a1aa;box-shadow:none"></div>
+    <div id="cTh" class="call" style="left:600px;top:950px"><small>thematic</small>hybrid 0.84 · graph local 0.66</div>
+  </div></section>
+
+  <!-- J  close -->
+  <section id="sJ" class="scene world" style="visibility:hidden"><div id="camJ" class="cam">
+    <div id="stack" class="line"><span id="w0">Neo4j</span><span id="w1"><span class="sep"> · </span>Milvus</span><span id="w2"><span class="sep"> · </span>Postgres</span><span id="w3"><span class="sep"> · </span>LangGraph</span><span id="w4"><span class="sep"> · </span>FastAPI</span><span id="w5"><span class="sep"> · </span>Next.js</span></div>
+    <div id="models" class="line">qwen3.8-27b · bge-m3 · qwen3-reranker-4b · all local</div>
+    <div id="runs" class="line">Runs on your machine</div>
+    <div id="repo" class="line">github.com/zharmedia386/nexus</div>
+  </div></section>
+
+</div>
+
+<script src="./runtime/vendor/gsap.min.js"></script>
+<script src="./runtime/motion.js"></script>
+<script>
+/* SEEK CONTRACT: everything visible is a pure function of t. Times below are film seconds from film/vo/schedule.json. */
+const M = Motion.film({ fps: 30, duration: 103.6, width: 1920, height: 1080, clock: 'smooth' });
+const F = (t) => Math.round(t * 30);
+
+// Camera as x/y/scale about the top-left: [t, scale, centreX, centreY, ease] puts (cx, cy) of the 1920x1080 layer at frame centre.
+function cam(sel, keys) {
+  M.kf(sel, 'scale', keys.map(([t, s, , , e]) => [F(t), s, e]));
+  M.kf(sel, 'x', keys.map(([t, s, cx, , e]) => [F(t), 960 - s * cx, e]));
+  M.kf(sel, 'y', keys.map(([t, s, , cy, e]) => [F(t), 540 - s * cy, e]));
+}
+// Cursor tip path [t, x, y, ease] in the capture's CSS px; press = 3-frame squash at each click time.
+function cursor(sel, keys, presses, on, off) {
+  M.show(sel, F(on), F(off));
+  M.kf(sel, 'x', keys.map(([t, x, , e]) => [F(t), x, e]));
+  M.kf(sel, 'y', keys.map(([t, , y, e]) => [F(t), y, e]));
+  const scale = [[0, 1]];
+  presses.forEach((t) => scale.push([F(t) - 1, 1], [F(t) + 2, 0.82, 'softLand'], [F(t) + 6, 1, 'softLand']));
+  M.kf(sel, 'scale', scale);
+}
+const scenes = [['#sA', 0, 10.3], ['#sB', 10.3, 20.5], ['#sC', 20.5, 24.6], ['#sD', 24.6, 37.0], ['#sC', 37.0, 51.4],
+  ['#sF', 51.4, 58.5], ['#sG', 58.5, 64.6], ['#sH', 64.6, 69.6], ['#sI', 69.6, 92.6], ['#sJ', 92.6, 103.6]];
+scenes.forEach(([sel, a, b], i) => M.cut(F(a), { hide: i ? [scenes[i - 1][0]] : [], show: [sel] }));
+
+/* ---------- A  cold open ---------- */
+cam('#camA', [[0, 1.32, 900, 650], [5.6, 1.42, 960, 660, 'cruise'], [6.4, 1.42, 960, 650], [7.4, 1.5, 960, 640, 'softInOut'], [8.3, 1.72, 960, 704, 'glide'], [10.3, 1.8, 960, 704, 'cruise']]);
+// The capture's first painted frame is 0.17 s in, so the clip starts 0.2 s in and its click times move 0.2 s earlier.
+cursor('#curA', [[0.4, 1320, 980], [1.1, 925, 690, 'glide'], [5.2, 925, 690], [5.8, 1415, 688, 'softInOut']], [1.39, 5.94], 0.4, 6.8);
+
+/* ---------- B  three documents ---------- */
+cam('#docs', [[10.3, 0.55, 1890, 500], [12.9, 0.6, 1890, 500, 'cruise'], [13.6, 1.15, 490, 470, 'whip'], [15.8, 1.18, 500, 470, 'cruise'],
+  [16.4, 1.15, 1890, 470, 'whip'], [17.7, 1.18, 1900, 470, 'cruise'], [18.3, 1.15, 3290, 470, 'whip'], [19.6, 1.18, 3300, 470, 'cruise'], [20.5, 0.52, 1890, 500, 'gentleIn']]);
+['#doc1', '#doc2', '#doc3'].forEach((sel, i) => M.enter(sel, { at: F(10.3) + i * 4, frames: 14, from: { y: 70 }, smear: { axis: 'y', px: 24, frames: 3 } }));
+[[1, 14.5], [2, 16.6], [3, 18.6]].forEach(([n, t]) => {
+  M.kf(`#doc${n} .key`, '--hl', [[F(t), 0], [F(t) + 14, 100, 'softLand']], { fmt: (v) => v + '%' });
+  M.kf(`#doc${n} .key`, 'color', [[F(t), '#ffffffcc'], [F(t) + 8, '#ffffff']]);
+});
+
+/* ---------- C  the graph ---------- */
+function rng(seed) { return () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+(function buildField() {
+  const rand = rng(386);
+  const gauss = () => Math.sqrt(-2 * Math.log(rand() + 1e-9)) * Math.cos(2 * Math.PI * rand());
+  // Type mix from /graph/stats on the extracted graph: 207 people, 150 companies, 8 groups, 9 sectors, 1 location.
+  const types = [...Array(207).fill('#d95926'), ...Array(150).fill('#3987e5'), ...Array(8).fill('#199e70'), ...Array(10).fill('#a1a1aa')];
+  for (let i = types.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [types[i], types[j]] = [types[j], types[i]]; }
+  const centres = Array.from({ length: 16 }, () => [-120 + rand() * 2160, -100 + rand() * 1280]);
+  const path = [[470, 600], [850, 450], [1150, 660], [1480, 460]];
+  // Keep the walk legible: no field nodes within reach of the path, its pills or its labels.
+  const seg = (x, y, [ax, ay], [bx, by]) => { const k = Math.max(0, Math.min(1, ((x - ax) * (bx - ax) + (y - ay) * (by - ay)) / ((bx - ax) ** 2 + (by - ay) ** 2))); return Math.hypot(x - ax - k * (bx - ax), y - ay - k * (by - ay)); };
+  const boxes = [[300, 560, 640, 640], [710, 410, 990, 490], [1010, 620, 1290, 700], [1320, 420, 1640, 500], [470, 370, 730, 500], [835, 590, 1025, 710], [1280, 575, 1560, 720]];
+  const nearPath = (x, y) => path.slice(1).some((b, i) => seg(x, y, path[i], b) < 60) || boxes.some(([l, t, r, btm]) => x > l - 20 && x < r + 20 && y > t - 20 && y < btm + 20);
+  const nodes = path.map(([x, y]) => ({ x, y, c: '#ffffff' }));
+  while (nodes.length < 375) {
+    const [cx, cy] = centres[Math.floor(rand() * centres.length)];
+    const x = cx + gauss() * 120, y = cy + gauss() * 95;
+    if (!nearPath(x, y)) nodes.push({ x, y, c: types[nodes.length - 4] });
+  }
+  const near = nodes.map((a, i) => nodes.map((b, j) => [Math.hypot(a.x - b.x, a.y - b.y), j]).filter(([, j]) => j !== i).sort((p, q) => p[0] - q[0]).slice(0, 5).map(([, j]) => j));
+  let edges = '';
+  for (let k = 0; k < 1142; k++) {
+    const a = 4 + Math.floor(rand() * 371), b = near[a][Math.floor(rand() * 5)];
+    edges += `M${nodes[a].x.toFixed(1)} ${nodes[a].y.toFixed(1)}L${nodes[b].x.toFixed(1)} ${nodes[b].y.toFixed(1)}`;
+  }
+  const dots = {};
+  nodes.slice(4).forEach(({ x, y, c }) => { dots[c] = (dots[c] || '') + `M${(x - 4).toFixed(1)} ${y.toFixed(1)}a4 4 0 1 0 8 0a4 4 0 1 0-8 0`; });
+  document.getElementById('field').innerHTML = `<path d="${edges}" stroke="#ffffff1c" stroke-width="1.2" fill="none"/>` +
+    Object.entries(dots).map(([c, d]) => `<path d="${d}" fill="${c}"/>`).join('') +
+    path.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7" fill="#fff"/>`).join('');
+})();
+M.kf('#fieldWrap', '--r', [[F(20.5), 0], [F(22.8), 1500, 'softLand']], { fmt: (v) => v + 'px' });
+M.count('#nEnt', { at: F(20.9), from: 0, to: 375, frames: 40, round: true, format: 'comma', seed: 3 });
+M.count('#nRel', { at: F(21.1), from: 0, to: 1142, frames: 44, round: true, format: 'comma', seed: 5 });
+M.enter('#tally', { at: F(20.8), frames: 12, from: { y: 30 } });
+M.hide('#tally', F(37.0));
+
+/* ---------- E  the walk, hop by hop ---------- */
+cam('#camG', [[20.5, 1.0, 975, 555], [24.6, 1.07, 975, 555, 'cruise'], [37.0, 1.08, 975, 555], [38.2, 1.7, 650, 520, 'glide'], [40.6, 1.72, 700, 525, 'cruise'],
+  [41.6, 1.7, 1000, 560, 'softInOut'], [43.6, 1.72, 1010, 560, 'cruise'], [44.4, 1.7, 1310, 560, 'softInOut'], [49.0, 1.74, 1330, 565, 'cruise'], [50.2, 1.36, 975, 560, 'softInOut'], [51.4, 1.4, 975, 560, 'cruise']]);
+M.kf('#field', 'opacity', [[F(37.0), 1], [F(38.0), 0.22, 'softInOut']]);
+[['#n0', 37.7], ['#n1', 40.2], ['#n2', 42.8], ['#n3', 45.1]].forEach(([sel, t]) => M.enter(sel, { at: F(t), frames: 12, from: { scale: 1.6, y: -10 }, ease: 'snapSettle' }));
+[['#e0', 38.6, 39.9], ['#e1', 41.8, 42.8], ['#e2', 44.2, 45.1]].forEach(([sel, a, b]) => M.kf(sel, 'strokeDashoffset', [[F(a), 1], [F(b), 0, 'softLand']]));
+[['#r0', 39.0], ['#r1', 42.2], ['#r2', 48.6]].forEach(([sel, t]) => M.enter(sel, { at: F(t), frames: 12, from: { y: 24 } }));
+
+/* ---------- D  real ask ---------- */
+M.cut(F(32.6), { hide: ['#vD1'], show: ['#vD2'] });
+M.hide('#vD2', 0); M.show('#vD2', F(32.6));
+cam('#camD', [[24.6, 1.22, 960, 560], [25.6, 1.24, 960, 560, 'cruise'], [26.7, 1.5, 700, 700, 'softInOut'], [29.6, 1.54, 700, 700, 'cruise'],
+  [30.6, 1.5, 1236, 690, 'softInOut'], [35.6, 1.56, 1236, 690, 'cruise'], [36.3, 1.45, 972, 700, 'glide'], [37.0, 1.47, 972, 700, 'cruise']]);
+
+/* ---------- F  citation ---------- */
+cam('#camF', [[51.4, 2.0, 1236, 810], [54.9, 2.04, 1236, 810, 'cruise'], [55.9, 1.9, 1415, 606, 'softInOut'], [58.5, 1.98, 1415, 606, 'cruise']]);
+cursor('#curF', [[51.4, 1420, 846], [52.8, 1180, 885, 'glide'], [54.4, 1180, 885], [55.0, 1420, 935, 'softInOut']], [53.19, 55.24], 51.4, 55.7);
+M.show('#ringF', F(56.3));
+M.kf('#ringF', 'scale', [[F(56.3), 1.12], [F(56.3) + 10, 1, 'softLand']]);
+
+/* ---------- G  explore ---------- */
+cam('#camGx', [[58.5, 1.6, 640, 700], [59.6, 1.62, 640, 700, 'cruise'], [61.2, 1.15, 960, 640, 'softInOut'], [62.4, 1.2, 960, 640, 'cruise'], [64.6, 1.45, 956, 650, 'glide']]);
+cursor('#curG', [[58.5, 640, 664], [58.9, 640, 718, 'softInOut']], [59.05], 58.5, 59.7);
+
+/* ---------- H  themes ---------- */
+M.hide('#plH', 0); M.show('#plH', F(66.8));
+cam('#camH', [[64.6, 1.18, 960, 560], [66.8, 1.22, 960, 560, 'cruise'], [67.8, 1.75, 683, 545, 'glide'], [69.6, 1.82, 690, 545, 'cruise']]);
+
+/* ---------- I  proof ---------- */
+M.hide('#plI', 0); M.show('#plI', F(72.0));
+cam('#camI', [[69.6, 1.0, 960, 540], [72.0, 1.0, 960, 540], [73.4, 1.55, 890, 348, 'glide'], [78.2, 1.6, 895, 348, 'cruise'],
+  [79.1, 2.0, 600, 270, 'softInOut'], [85.4, 2.05, 600, 270, 'cruise'], [86.4, 1.6, 800, 743, 'whip'], [92.6, 1.66, 800, 743, 'cruise']]);
+[['#cN', 72.3], ['#cGl', 74.4], ['#cHy', 76.8], ['#cDf', 79.4], ['#cTh', 89.2]].forEach(([sel, t]) => M.enter(sel, { at: F(t), frames: 10, from: { y: 16, scale: 1.2 } }));
+M.count('#vGl', { at: F(74.6), from: 0, to: 70, frames: 18, format: (v) => (v / 100).toFixed(2), seed: 2 });
+M.count('#vHy', { at: F(77.0), from: 0, to: 52, frames: 16, format: (v) => (v / 100).toFixed(2), seed: 4 });
+M.count('#vDf', { at: F(79.6), from: 0, to: 18, frames: 16, format: (v) => '+' + (v / 100).toFixed(2), seed: 6 });
+// The 2x push-in on the diff would crop these two at the frame edge.
+M.hide('#cGl', F(79.0)); M.hide('#cHy', F(79.0));
+[['#ringCi', 82.7], ['#ringTh1', 89.9], ['#ringTh2', 91.0]].forEach(([sel, t]) => {
+  M.show(sel, F(t));
+  M.kf(sel, 'scale', [[F(t), 1.25], [F(t) + 10, 1, 'softLand']]);
+});
+
+/* ---------- J  close ---------- */
+cam('#camJ', [[92.6, 1.0, 960, 540], [103.6, 1.04, 960, 540, 'cruise']]);
+[93.8, 94.5, 95.0, 95.6, 96.4, 97.2].forEach((t, i) => M.enter(`#w${i}`, { at: F(t), frames: 12, from: { y: 50 }, smear: { axis: 'y', px: 18, frames: 3 } }));
+M.enter('#models', { at: F(97.9), frames: 14, from: { y: 26 } });
+M.kf('#stack', 'y', [[F(99.4), 0], [F(100.2), -150, 'softInOut']]);
+M.kf('#models', 'y', [[F(99.4), 0], [F(100.2), -150, 'softInOut']]);
+M.kf('#stack', 'opacity', [[F(99.4), 1], [F(100.2), 0.5, 'softInOut']]);
+M.kf('#models', 'opacity', [[F(99.4), 1], [F(100.2), 0.5, 'softInOut']]);
+M.words('#runs', { at: F(99.7), mech: 'rise', dist: 60, gaps: [5, 5, 6], frames: 12 });
+M.enter('#repo', { at: F(101.8), frames: 14, from: { y: 24 } });
+
+window.__ready = Motion.loaded().then(() => (location.search.includes('selftest') ? Motion.selfTest(M, { samples: 24 }) : null));
+</script>
+</body>
+</html>
